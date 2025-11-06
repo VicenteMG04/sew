@@ -27,14 +27,15 @@
     </header>
     <p>Estás en: <a href="index.html" title="Página de inicio">Inicio</a> >> <a href="juegos.html" title="Página de juegos">Juegos</a> >> <strong>Cronómetro</strong></p>
     <main>
-        <script>
-            const cronometro = new Cronometro();
-        </script>
         <h2>Cronómetro</h2>
         <p>00:00.0</p>
-        <button onclick="cronometro.arrancar()">Arrancar</button>
-        <button onclick="cronometro.parar()">Parar</button>
-        <button onclick="cronometro.reiniciar()">Reiniciar</button>
+        <button>Arrancar</button>
+        <button>Parar</button>
+        <button>Reiniciar</button>
+        <script>
+            const cronometro = new Cronometro();
+            cronometro.añadirListeners(); // Refactorización para eliminar los onclick
+        </script>
     </main>
     <footer>
         <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>

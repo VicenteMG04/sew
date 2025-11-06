@@ -9,6 +9,8 @@
     <title>MotoGP</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <script src="js/carrusel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -25,7 +27,12 @@
         </nav>
     </header>
     <main>
-        <p>En desarrollo</p>
+        <script>
+            $(document).ready(function() {
+                let carrusel = new Carrusel();
+                carrusel.getFotografias();
+            });
+        </script>
     </main>
     <footer>
         <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>

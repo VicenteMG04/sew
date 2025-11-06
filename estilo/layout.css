@@ -117,6 +117,16 @@ footer {
     text-align: center;
 }
 
+/* Carrusel */
+/* Especificidad del selector: 003 */
+article h2 + img {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 1em;
+}
+
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */
 
 /* Escritorio y portátiles L (> 1025px) */
@@ -162,6 +172,19 @@ footer {
     /* Especificidad del selector: 002 */
     header + p {
         display: none; /* En dispositivos móviles, NO mostrar las migas de navegación */
+    }
+
+    /* Especificidad del selector: 003 */
+    article h2 + img {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+
+    /* Especificidad del selector: 002 */
+    article h2 {
+        font-size: 1.2em;
+        text-align: center;
     }
 }
 

@@ -31,9 +31,11 @@
         <script>
             let ciudad = new Ciudad("Le Mans", "Francia", "Manceaux");
             ciudad.completarInfo();
-            document.write("<p>Ciudad: " + ciudad.getNombre() + "</p>");
-            document.write("<p>País: " + ciudad.getPais() + "</p>");
-            document.write(ciudad.getInfoSecundaria());
+            // Refactorización para favorecer buenas prácticas:
+            // document.write("<p>Ciudad: " + ciudad.getNombre() + "</p>");
+            // document.write("<p>País: " + ciudad.getPais() + "</p>");
+            // document.write(ciudad.getInfoSecundaria());
+            ciudad.mostrarInfo(); // Método creado en la sesión 8 para evitar el uso de document.write()
             ciudad.getCoordenadas();
         </script>
     </main>
