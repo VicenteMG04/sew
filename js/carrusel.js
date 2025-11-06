@@ -68,19 +68,16 @@ class Carrusel {
         articulo.append(encabezado);
         articulo.append(imagen);
         $("main").append(articulo);
-
         // Cambio de fotografía cada 3 segundos
         setInterval(this.#cambiarFotografia.bind(this), 3000);
     }
 
     #cambiarFotografia() {
         this.#actual++;
-
         // Si se llega al final del carrusel, vuelve al principio
         if (this.#actual >= this.#maximo) {
             this.#actual = 0;
         }
-
         $("main img").attr("src", this.#imagenes[this.#actual]);
     }
 }
