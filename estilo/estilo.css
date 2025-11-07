@@ -47,8 +47,9 @@ header a:hover {
 }
 
 /* Especificidad del selector: 012 | 012 */
-header a:active, header a:focus {
-    color: #FFDDFF; /* Advertencia controlada: Color de fondo heredado de <header> */
+header a:active,
+header a:focus {
+    color: #FFDDFF; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
 }
 
 /* Especificidad del selector: 010 */
@@ -78,12 +79,14 @@ a:hover {
 }
 
 /* Especificidad del selector: 011 | 011 */
-a:active, a:focus {
-    color: #550000; /* Advertencia controlada: Color de fondo heredado de <header> */
+a:active,
+a:focus {
+    color: #550000; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
 }
 
 /* Especificidad del selector: 001 | 001*/
-img, video {
+img,
+video {
     box-shadow: 0 0.5em 0.5em #777777;
 }
 
@@ -101,6 +104,7 @@ dt {
 
 /* Especificidad del selector: 001 */
 table {
+    border-collapse: collapse;
     border: 0.1em solid #000000;
 }
 
@@ -112,9 +116,11 @@ caption {
 }
 
 /* Especificidad del selector: 001 | 001 | 001 */
-th, td, tr {
+th,
+td,
+tr {
     border: 0.1em solid #000000;
-    background-color: #E6E275; /* Advertencia controlada: Color heredado de <body> */
+    background-color: #E6E275; /* Advertencia controlada (x3): Color heredado de <body> */
 }
 
 /* Especificidad del selector: 011 */
@@ -127,4 +133,15 @@ footer {
     background-color: #0910A0;
     color: #FFFFFF;
     border-radius: 0.8em;
+}
+
+/* Especificidad del selector: 003 */
+article h2 + img {
+    border-radius: 1em;
+}
+
+/* Especificidad del selector: 003 */
+main h3 ~ article {
+    border: 0.1em solid #000000;
+    border-radius: 0.5em;
 }

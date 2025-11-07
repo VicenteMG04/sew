@@ -47,7 +47,9 @@ header + p {
 }
 
 /* Especificidad del selector: 001 | 001 | 001 */
-img, video, audio {
+img,
+video,
+audio {
     max-width: 100%;
     object-fit: cover;
 }
@@ -75,7 +77,8 @@ ol {
 }
 
 /* Especificidad del selector: 001 | 001 */
-ul, ol {
+ul,
+ol {
     padding-left: 1.2em;
 }
 
@@ -98,15 +101,22 @@ dd {
 }
 
 /* Especificidad del selector: 001 */
+h3 {
+    margin-top: 3em;
+}
+
+/* Especificidad del selector: 001 */
 table {
     width: 100%;
-    border-collapse: collapse;
     text-align: center;
     table-layout: fixed;
 }
 
 /* Especificidad del selector: 001 | 001 | 001 | 001 */
-caption, th, td, tr {
+caption,
+th,
+td,
+tr {
     padding: 2%;
 }
 
@@ -124,7 +134,12 @@ article h2 + img {
     width: 80%;
     height: auto;
     margin: 0 auto;
-    border-radius: 1em;
+}
+
+/* Especificidad del selector: 003 */
+main h3 ~ article {
+    margin-block: 1em;
+    padding: 0.5em 2em 1.5em;
 }
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */
@@ -176,9 +191,8 @@ article h2 + img {
 
     /* Especificidad del selector: 003 */
     article h2 + img {
-        width: 100%;
-        height: auto;
-        border-radius: 0;
+        width: 100%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 002 */

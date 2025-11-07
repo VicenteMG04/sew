@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="author" content="Vicente Megido García (UO294013)" />
     <meta name="description" content="Menú principal de la web MotoGP - Desktop" />
-    <meta name="keywords" content="MotoGP, aplicación, escritorio, carreras, motos, desktop" />
+    <meta name="keywords" content="MotoGP, aplicación, escritorio, carreras, motos, Le Mans, carrusel, imágenes, noticias, desktop" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
     <script src="js/carrusel.js"></script>
+    <script src="js/noticias.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
@@ -31,6 +32,8 @@
             $(document).ready(function() {
                 let carrusel = new Carrusel();
                 carrusel.getFotografias();
+                const noticias = new Noticias();
+                noticias.buscar();
             });
         </script>
     </main>

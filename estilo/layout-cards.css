@@ -23,15 +23,15 @@ main p {
 
     /* Especificidad del selector: 001 */
     main {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto auto repeat(6, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        grid-template-rows: auto auto repeat(6, 1fr); /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 002 | 002 */
     main h2,
     main p {
-        grid-column-start: 1;
-        grid-column-end: 3;
+        grid-column-start: 1; /* Advertencia controlada (x2): Redefinición de propiedad para preservar la adaptabilidad de la web */
+        grid-column-end: 3; /* Advertencia controlada (x2): Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 }
 
