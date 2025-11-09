@@ -81,21 +81,18 @@ class Ciudad {
         const velocidades_viento = data.hourly.wind_speed_10m;
         const direcciones_viento = data.hourly.wind_direction_10m;
 
-        main.append("<h4>Evolución meteorológica por horas (cada 3 horas)</h4>");
-        for (let i = 0; i < horas.length; i += 3) { // cada 3 horas
-            const bloque = `
-                <p>Hora: ${horas[i].split("T")[1]}</p>
-                <ul>
-                    <li>Temperatura: ${temperaturas[i]} °C</li>
-                    <li>Sensación Térmica: ${sensaciones_termicas[i]} °C</li>
-                    <li>Lluvia: ${lluvias[i]} mm</li>
-                    <li>Humedad: ${humedades[i]} %</li>
-                    <li>Velocidad del Viento: ${velocidades_viento[i]} km/h</li>
-                    <li>Dirección del Viento: ${direcciones_viento[i]} °</li>
-                </ul>
-            `;
-            main.append(bloque);
-        }
+        main.append(`<h4>Hora de la carrera: ${horas[14].split("T")[1]} CEST (GMT+2)</h4>`);
+        const bloque = `
+            <ul>
+                <li>Temperatura: ${temperaturas[14]} °C</li>
+                <li>Sensación Térmica: ${sensaciones_termicas[14]} °C</li>
+                <li>Lluvia: ${lluvias[14]} mm</li>
+                <li>Humedad: ${humedades[14]} %</li>
+                <li>Velocidad del Viento: ${velocidades_viento[14]} km/h</li>
+                <li>Dirección del Viento: ${direcciones_viento[14]} °</li>
+            </ul>
+        `;
+        main.append(bloque);
     }
 
     getMeteorologiaEntrenos() {
