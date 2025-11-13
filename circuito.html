@@ -30,6 +30,7 @@
         <script>
             const circuito = new Circuito();
             const svg = new CargadorSVG();
+            const kml = new CargadorKML();
         </script>
         <h2>Circuito: Le Mans</h2>
         <article>
@@ -39,6 +40,10 @@
         <article>
             <p>Carga del SVG con la altimetría del circuito: <input type="file" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0])></p>
             <svg><!-- Aquí se volcará el contenido del SVG --></svg>
+        </article>
+        <article>
+            <p>Carga del KML con la planimetría del circuito: <input type="file" accept=".kml" onchange=kml.leerArchivoKML(this.files[0])></p>
+            <div><!-- Aquí se volcará el contenido del KML --></div> <!-- Caso excepcional de uso de bloque dinámico div -->
         </article>
     </main>
     <footer>

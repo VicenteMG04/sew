@@ -52,7 +52,7 @@ class CargadorSVG {
     }
 
     leerArchivoSVG(fichero) {
-        if (fichero && fichero.type === 'image/svg+xml') {
+        if (fichero && fichero.type.match(/svg.*/)) {
             const lector = new FileReader();
             lector.onload = (e) => {
                 this.insertarSVG(e.target.result);
@@ -65,11 +65,82 @@ class CargadorSVG {
         }
     }
 
-    insertarSVG(svg) {
+    insertarSVG(svgTexto) {
         const parser = new DOMParser();
-        const documentoSVG = parser.parseFromString(svg, 'image/svg+xml');
+        const documentoSVG = parser.parseFromString(svgTexto, 'image/svg+xml');
         const elementoSVG = documentoSVG.documentElement;
         const contenedor = document.querySelector("main article:nth-of-type(2) svg");
         contenedor.replaceWith(elementoSVG);
+    }
+}
+
+class CargadorKML {
+    // Atributos privados
+    #apiKey = "AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk";
+
+    constructor() {
+    
+    }
+
+    leerArchivoKML(fichero) {
+        if (fichero && fichero.type.match(/kml.*/)) {
+            const lector = new FileReader();
+            lector.onload = (e) => {
+                this.insertarCapaKML(e.target.result);
+            };
+            lector.readAsText(fichero);
+        } else {
+            const p = document.createElement("p");
+            p.textContent = "No se puede cargar el archivo. Asegúrate de que es un archivo KML.";
+            document.querySelector("main article:nth-of-type(3)").appendChild(p);
+        }
+    }
+
+    async insertarCapaKML(kmlTexto) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(kmlTexto, "application/xml");
+
+        // Todas las coordenadas guardadas en el archivo KML
+        const coords = xmlDoc.getElementsByTagName("coordinates");
+        const puntos = [];
+        for (let i = 0; i < coords.length; i++) {
+            const conjunto = coords[i].textContent.trim().split(/\s+/);
+            for (let j = 0; j < conjunto.length; j++) {
+                const [lng, lat] = conjunto[j].split(",").map(Number);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    puntos.push({ lat: lat, lng: lng });
+                }
+            }
+        }
+
+        if (puntos.length === 0) {
+            const p = document.createElement("p");
+            p.textContent = "No se encontraron coordenadas válidas en el archivo KML.";
+            document.querySelector("main article:nth-of-type(3)").appendChild(p);
+            return;
+        }
+
+        const { Map, Marker, Polyline, LatLngBounds } = await google.maps.importLibrary("maps");
+
+        const contenedor = document.querySelector("main article:nth-of-type(3) div");
+        const centro = puntos[0];
+        const mapa = new Map(contenedor, {
+            zoom: 15,
+            center: centro
+        });
+
+        new Marker({ position: centro, map: mapa, title: "Inicio del circuito" });
+
+        new Polyline({
+            path: puntos,
+            map: mapa,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 3
+        });
+
+        const limites = new LatLngBounds();
+        puntos.forEach(p => limites.extend(p));
+        mapa.fitBounds(limites);
     }
 }
