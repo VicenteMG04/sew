@@ -145,3 +145,11 @@ main h3 ~ article {
     border: 0.1em solid #000000;
     border-radius: 0.5em;
 }
+
+/* Especificidad del selector: 001 */
+svg {
+    display: block;
+    margin: auto;
+    width: 60%;
+    height: auto;
+}

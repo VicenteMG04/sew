@@ -27,11 +27,19 @@
     </header>
     <p>Estás en: <a href="index.html" title="Página de inicio">Inicio</a> >> <strong>Circuito</strong></p>
     <main>
-        <h2>Circuito: Le Mans</h2>
         <script>
             const circuito = new Circuito();
+            const svg = new CargadorSVG();
         </script>
-        <p><input type="file" onchange=circuito.leerArchivoHTML(this.files[0])></p>
+        <h2>Circuito: Le Mans</h2>
+        <article>
+            <p>Carga de información del ciruito: <input type="file" accept=".html" onchange=circuito.leerArchivoHTML(this.files[0])></p>
+            <!-- Primera apartado, se cubrirá con los datos del documento InfoCircuito.html --->
+        </article>
+        <article>
+            <p>Carga del SVG con la altimetría del circuito: <input type="file" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0])></p>
+            <svg><!-- Aquí se volcará el contenido del SVG --></svg>
+        </article>
     </main>
     <footer>
         <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>

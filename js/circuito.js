@@ -15,12 +15,11 @@ class Circuito {
 
     leerArchivoHTML(fichero) {
         // Limpiar primero el contenido previo sin borrar el encabezado h2 ni el selector de archivos
-        const h2 = document.querySelector("main h2");
-        const inputFile = document.querySelector("input[type='file']");
-        document.querySelector("main").innerHTML = "";
-        document.querySelector("main").appendChild(h2);
-        document.querySelector("main").appendChild(inputFile);
-
+        const contenedor = document.querySelector("main article:nth-of-type(1)");
+        const inputFile = contenedor.querySelector("input");
+        contenedor.innerHTML = "";
+        contenedor.appendChild(inputFile);
+        
         var tipoFichero = /html.*/;
         if (fichero.type.match(tipoFichero)) {
             var lector = new FileReader();
@@ -33,14 +32,44 @@ class Circuito {
                 const contenido = doc.body.querySelectorAll("main > *");
                 contenido.forEach(element => {
                     if (element.tagName != "H2") { // Evitar duplicar el encabezado h2
-                        document.querySelector("main").appendChild(element);
+                        contenedor.appendChild(element);
                     }
                 });
             }      
             lector.readAsText(fichero);
         } else {
-            document.createElement("p").textContent = "El archivo no es del tipo HTML.";
-            document.querySelector("main").appendChild(p);
+            const p = document.createElement("p");
+            p.textContent = "El archivo no es del tipo HTML.";
+            contenedor.appendChild(p);
         }   
+    }
+}
+
+class CargadorSVG {
+
+    constructor() {
+
+    }
+
+    leerArchivoSVG(fichero) {
+        if (fichero && fichero.type === 'image/svg+xml') {
+            const lector = new FileReader();
+            lector.onload = (e) => {
+                this.insertarSVG(e.target.result);
+            };
+            lector.readAsText(fichero);
+        } else {
+            const p = document.createElement("p");
+            p.textContent = "No se puede cargar el archivo. Asegúrate de que es un archivo SVG.";
+            document.querySelector("main article:nth-of-type(2)").appendChild(p);
+        }
+    }
+
+    insertarSVG(svg) {
+        const parser = new DOMParser();
+        const documentoSVG = parser.parseFromString(svg, 'image/svg+xml');
+        const elementoSVG = documentoSVG.documentElement;
+        const contenedor = document.querySelector("main article:nth-of-type(2) svg");
+        contenedor.replaceWith(elementoSVG);
     }
 }
