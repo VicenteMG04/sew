@@ -87,7 +87,6 @@ def escribeHTML(outFile, root, ns):
     for v in videos:
         outFile.write(f'    <video controls><source src="{v}" type="video/mp4"></video>\n')
 
-
 # Función principal que procesa el archivo XML y genera el archivo HTML
 def main():
     try:
