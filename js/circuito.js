@@ -48,7 +48,6 @@ class Circuito {
 class CargadorSVG {
 
     constructor() {
-
     }
 
     leerArchivoSVG(fichero) {
@@ -75,15 +74,12 @@ class CargadorSVG {
 }
 
 class CargadorKML {
-    // Atributos privados
-    #apiKey = "AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk";
-
-    constructor() {
     
+    constructor() {
     }
 
     leerArchivoKML(fichero) {
-        if (fichero && fichero.type.match(/kml.*/)) {
+        if (fichero && (fichero.type.match(/kml.*/) || fichero.name.toLowerCase().endsWith(".kml"))) { // En algunos navegadores el tipo MIME de KML puede no estar definido
             const lector = new FileReader();
             lector.onload = (e) => {
                 this.insertarCapaKML(e.target.result);
@@ -120,27 +116,23 @@ class CargadorKML {
             return;
         }
 
-        const { Map, Marker, Polyline, LatLngBounds } = await google.maps.importLibrary("maps");
-
         const contenedor = document.querySelector("main article:nth-of-type(3) div");
-        const centro = puntos[0];
-        const mapa = new Map(contenedor, {
+        const mapa = new google.maps.Map(contenedor, {
+            center: { lat: 47.953839, lng: 0.210905 }, // Mapa centrado en el centro del circuito
             zoom: 15,
-            center: centro
+            mapId: 'DEMO_MAP_ID' // Requiere habilitar mapas personalizados en Google Cloud Console
         });
 
-        new Marker({ position: centro, map: mapa, title: "Inicio del circuito" });
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-        new Polyline({
+        new AdvancedMarkerElement({ position: puntos[0], map: mapa, title: "Inicio (línea de salida)" });
+
+        new google.maps.Polyline({
             path: puntos,
             map: mapa,
             strokeColor: "#FF0000",
             strokeOpacity: 0.8,
             strokeWeight: 3
         });
-
-        const limites = new LatLngBounds();
-        puntos.forEach(p => limites.extend(p));
-        mapa.fitBounds(limites);
     }
 }

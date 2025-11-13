@@ -154,10 +154,7 @@ svg {
     height: auto;
 }
 
-/* Especificidad del selector: 001 */
-div {
-    display: block;
-    margin: auto;
-    width: 60%;
-    height: 50vh;
+/* Especificidad del selector: 002 */
+div img {
+    box-shadow: none;
 }

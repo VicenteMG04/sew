@@ -141,13 +141,21 @@ article h2 + img {
 video,
 img {
     display: block;
-    margin: 1% auto;
+    margin: 3% auto;
 }
 
 /* Especificidad del selector: 003 */
 main h3 ~ article {
     margin-block: 1em;
     padding: 0.5em 2em 1.5em;
+}
+
+/* Especificidad del selector: 003 */
+article p + div {
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 75vh;
 }
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */
@@ -208,6 +216,14 @@ main h3 ~ article {
     article h2 {
         font-size: 1.2em;
         text-align: center;
+    }
+
+    /* Especificidad del selector: 003 */
+    article p + div {
+        display: block;
+        margin: auto;
+        width: 95%;
+        height: 60vh;
     }
 }
 
