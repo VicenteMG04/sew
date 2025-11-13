@@ -9,6 +9,7 @@
     <title>MotoGP - Circuito</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <script src="js/menu.js"></script>
     <script src="js/circuito.js"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk&loading=async"></script>
 </head>
@@ -16,6 +17,8 @@
 <body>
     <header>
         <h1><a href="index.html" title="Página principal">MotoGP Desktop</a></h1>
+        <!-- Ejercicio opcional: Plegar el menú en dispositivos móviles -->
+        <button aria-expanded="false" aria-label="Mostrar u ocultar menú">☰ Menú</button>
         <nav>
             <a href="index.html" title="Página de inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto Fermín Aldeguer">Piloto</a>
@@ -35,15 +38,15 @@
         </script>
         <h2>Circuito: Le Mans</h2>
         <article>
-            <p>Carga de información del ciruito: <input type="file" accept=".html" onchange=circuito.leerArchivoHTML(this.files[0])></p>
-            <!-- Primera apartado, se cubrirá con los datos del documento InfoCircuito.html --->
+            <h3>Carga de información del ciruito: <input type="file" accept=".html" onchange=circuito.leerArchivoHTML(this.files[0])></h3>
+            <!-- Primera apartado, se cubrirá con los datos del documento InfoCircuito.html -->
         </article>
         <article>
-            <p>Carga del SVG con la altimetría del circuito: <input type="file" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0])></p>
+            <h3>Carga del SVG con la altimetría del circuito: <input type="file" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0])></h3>
             <svg><!-- Aquí se volcará el contenido del SVG --></svg>
         </article>
         <article>
-            <p>Carga del KML con la planimetría del circuito: <input type="file" accept=".kml" onchange=kml.leerArchivoKML(this.files[0])></p>
+            <h3>Carga del KML con la planimetría del circuito: <input type="file" accept=".kml" onchange=kml.leerArchivoKML(this.files[0])></h3>
             <div><!-- Aquí se volcará el contenido del KML --></div> <!-- Caso excepcional de uso de bloque dinámico div -->
         </article>
     </main>

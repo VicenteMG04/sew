@@ -63,6 +63,14 @@ header + p {
     font-size: 0.8em;
 }
 
+/* Especificidad del selector: 002 */
+header > button {
+    background: none;
+    color: #FFFFFF; /* Advertencia controlada: Color de fondo heredado de <header> */
+    border: 0.1em solid;
+    border-radius: 0.5em;
+}
+
 /* Especificidad del selector: 001 */
 a {
     text-decoration: none;

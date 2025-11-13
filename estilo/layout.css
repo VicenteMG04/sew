@@ -29,6 +29,11 @@ nav {
     justify-content: space-around;
 }
 
+/* Especificidad del selector: 011 */
+nav[hidden] {
+    display: none;
+}
+
 /* Especificidad del selector: 002 */
 nav a {
     padding: 1%;
@@ -46,12 +51,20 @@ header + p {
     margin: 2%;
 }
 
-/* Especificidad del selector: 001 | 001 | 001 */
+/* Especificidad del selector: 001 | 001 */
 img,
-video,
 audio {
-    margin: 1%;
+    margin: 2% 0;
     max-width: 100%;
+    object-fit: cover;
+}
+
+/* Especificidad del selector: 001 */
+video {
+    display: block;
+    margin: 2% auto;
+    max-width: 100%;
+    height: auto;
     object-fit: cover;
 }
 
@@ -137,13 +150,6 @@ article h2 + img {
     margin: 0 auto;
 }
 
-/* Especificidad del selector: 001 | 001 */
-video,
-img {
-    display: block;
-    margin: 3% auto;
-}
-
 /* Especificidad del selector: 003 */
 main h3 ~ article {
     margin-block: 1em;
@@ -151,7 +157,7 @@ main h3 ~ article {
 }
 
 /* Especificidad del selector: 003 */
-article p + div {
+article h3 + div {
     display: block;
     margin: auto;
     width: 75%;
@@ -160,25 +166,30 @@ article p + div {
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */
 
-/* Escritorio y portátiles L (> 1025px) */
-@media (min-width: 1025px) {
+/* Escritorio y portátiles L (> 769) */
+@media (min-width: 769px) {
     
+    /* Especificidad del selector: 002 */
+    header > button {
+        display: none;
+    }
+
+    /* Especificidad del selector: 012 */
+    header nav {
+        display: flex;
+    }
+
     /* Especificidad del selector: 001 */
     video {
         /* width: 100%; */
         width: 60%;
-        height: auto;
+        height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 001 */
     audio {
         width: 100%;
     }
-}
-
-/* Portátil (1024px) */
-@media (max-width: 1024px) {
-
 }
 
 /* Tablet (768px) */
@@ -192,6 +203,12 @@ article p + div {
     }
 
     /* Especificidad del selector: 002 */
+    header > button {
+        margin: 1em;
+        padding: 0.5em;
+    }
+
+    /* Especificidad del selector: 002 */
     header nav {
         flex-direction: column;
         width: 100%;
@@ -199,6 +216,11 @@ article p + div {
         flex-wrap: wrap;
         margin-top: 0.5em;
         padding: 1em;
+    }
+
+    /* Especificidad del selector: 012 */
+    header nav[hidden] {
+        display: none;
     } 
             
     /* Especificidad del selector: 002 */
@@ -219,11 +241,9 @@ article p + div {
     }
 
     /* Especificidad del selector: 003 */
-    article p + div {
-        display: block;
-        margin: auto;
-        width: 95%;
-        height: 60vh;
+    article h3 + div {
+        width: 95%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        height: 60vh; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 }
 
