@@ -9,6 +9,7 @@
     <title>MotoGP - Circuito</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <script src="js/circuito.js"></script>
 </head>
 
 <body>
@@ -27,7 +28,10 @@
     <p>Estás en: <a href="index.html" title="Página de inicio">Inicio</a> >> <strong>Circuito</strong></p>
     <main>
         <h2>Circuito: Le Mans</h2>
-        <p>En desarrollo</p>
+        <script>
+            const circuito = new Circuito();
+        </script>
+        <p><input type="file" onchange=circuito.leerArchivoHTML(this.files[0])></p>
     </main>
     <footer>
         <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>

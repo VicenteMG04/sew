@@ -10,24 +10,23 @@ class Noticias {
         this.#apiKey = "udb6f7ArWQFjLudHAh4MXdtIX7EJPCB2KDOmxcoS";
     }
 
-    buscar() {
+    async buscar() {
         const peticion = `${this.#url}?api_token=${this.#apiKey}&search=${this.#busqueda}&language=es&limit=5`;
 
-        fetch(peticion)
-            .then(respuesta => {
-                if (!respuesta.ok) {
-                    throw new Error("Error en la respuesta de la API");
-                }
-                return respuesta.json();
-            })
-            .then(datos => this.procesarInformacion(datos))
-            .catch(() => {
-                const section = document.createElement("section");
-                const errorMsg = document.createElement("p");
-                errorMsg.textContent = "No se han podido cargar las noticias.";
-                section.appendChild(errorMsg);
-                document.querySelector("main").appendChild(section);
-            });
+        try {
+            const respuesta = await fetch(peticion);
+            if (!respuesta.ok) {
+                throw new Error("Error en la respuesta de la API");
+            }
+            const datos = await respuesta.json();
+            this.procesarInformacion(datos);
+        } catch (error) {
+            const section = document.createElement("section");
+            const errorMsg = document.createElement("p");
+            errorMsg.textContent = "No se han podido cargar las noticias.";
+            section.appendChild(errorMsg);
+            document.querySelector("main").appendChild(section);
+        }
     }
 
     procesarInformacion(datosJSON) {

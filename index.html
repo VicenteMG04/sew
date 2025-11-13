@@ -29,11 +29,17 @@
     </header>
     <main>
         <script>
-            $(document).ready(function() {
-                let carrusel = new Carrusel();
-                carrusel.getFotografias();
-                const noticias = new Noticias();
-                noticias.buscar();
+            $(document).ready(async function() {
+                try {
+                    const carrusel = new Carrusel();
+                    await carrusel.getFotografias();
+                    const noticias = new Noticias();
+                    await noticias.buscar();
+                } catch (error) {
+                    const errorMsg = document.createElement("p");
+                    errorMsg.textContent = "No se han podido cargar los contenidos dinámicos.";
+                    document.querySelector("main").appendChild(errorMsg);
+                }
             });
         </script>
     </main>

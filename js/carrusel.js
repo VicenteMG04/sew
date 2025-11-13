@@ -14,24 +14,27 @@ class Carrusel {
     }
 
     getFotografias() {
-        $.ajax({
-            dataType: "jsonp", // Utilizar JSONP para evitar problemas de CORS
-            jsonp: "jsoncallback",
-            jsonpCallback: "jsonFlickrFeed", // Nombre de la función de callback esperada por Flickr
-            url: "https://api.flickr.com/services/feeds/photos_public.gne",
-            data: {
-                tags: this.#busqueda,
-                tagmode: "all",
-                format: "json",
-            },
-            method: "GET",
-            success: (data) => {
-                this.#procesarJSONFotografias(data);
-                this.#mostrarFotografias();
-            },
-            error: () => {
-                $("h2").html("Error al cargar las imágenes desde Flickr");
-            }
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                dataType: "jsonp", // Utilizar JSONP para evitar problemas de CORS
+                jsonp: "jsoncallback",
+                jsonpCallback: "jsonFlickrFeed", // Nombre de la función de callback esperada por Flickr
+                url: "https://api.flickr.com/services/feeds/photos_public.gne",
+                data: {
+                    tags: this.#busqueda,
+                    tagmode: "all",
+                    format: "json",
+                },
+                method: "GET",
+                success: (data) => {
+                    this.#procesarJSONFotografias(data);
+                    this.#mostrarFotografias();
+                    resolve();
+                },
+                error: () => {
+                    $("h2").html("Error al cargar las imágenes desde Flickr");
+                }
+            });
         });
     }
 
