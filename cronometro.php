@@ -3,7 +3,7 @@
     class Cronometro {
         protected $tiempo;
         protected $inicio;
-        protected $corriendo;
+        protected $corriendo; // Parámetro creado de forma adicional para controlar el estado del cronómetro y evitar comportamientos inesperados
 
         public function __construct() {
             $this->tiempo = 0;
@@ -11,8 +11,9 @@
         }
 
         public function arrancar() {
-            if (!$this->corriendo){
-                $this->inicio = microtime(true);
+            if (!$this->corriendo) {
+                $this->tiempo = 0; // Reiniciamos el tiempo cada vez que se arranca
+                $this->inicio = microtime(true); // Con microtime(true) podemos obtener el tiempo en segundos con microsegundos como fracción decimal
                 $this->corriendo = true;
             }
         }
@@ -33,7 +34,7 @@
             $minutos = floor($tiempoActual / 60);
             $segundos = floor($tiempoActual % 60);
             $decimas = floor(($tiempoActual - floor($tiempoActual)) * 10);
-            echo sprintf("%02d:%02d.%d", $minutos, $segundos, $decimas); // Formato mm:ss.s
+            return sprintf("%02d:%02d.%d", $minutos, $segundos, $decimas); // Formato mm:ss.s
         }
     }
 
@@ -61,12 +62,12 @@
         <h1><a href="index.html" title="Página principal">MotoGP Desktop</a></h1>
         <!-- Ejercicio opcional: Plegar el menú en dispositivos móviles -->
         <button aria-expanded="false" aria-label="Mostrar u ocultar menú">☰ Menú</button>
-        <nav>
+        <nav hidden>
             <a href="index.html" title="Página de inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto Fermín Aldeguer">Piloto</a>
             <a href="circuito.html" title="Información del circuito de Le Mans">Circuito</a>
             <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
-            <a href="clasificaciones.html" title="Página de clasificaciones">Clasificaciones</a>
+            <a href="clasificaciones.php" title="Página de clasificaciones">Clasificaciones</a>
             <a href="juegos.html" title="Página de juegos" class="active">Juegos</a>
             <a href="ayuda.html" title="Página de ayuda">Ayuda</a>
         </nav>

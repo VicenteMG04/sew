@@ -17,12 +17,12 @@ def prologoHTML(outFile):
     outFile.write('<body>\n')
     outFile.write('  <header>\n')
     outFile.write('    <h1><a href="index.html" title="Página principal">MotoGP Desktop</a></h1>\n')
-    outFile.write('    <nav>\n')
+    outFile.write('    <nav hidden>\n')
     outFile.write('      <a href="index.html" title="Página de inicio">Inicio</a>\n')
     outFile.write('      <a href="piloto.html" title="Información del piloto Fermín Aldeguer">Piloto</a>\n')
     outFile.write('      <a href="circuito.html" title="Información del circuito de Le Mans">Circuito</a>\n')
     outFile.write('      <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>\n')
-    outFile.write('      <a href="clasificaciones.html" title="Página de clasificaciones">Clasificaciones</a>\n')
+    outFile.write('      <a href="clasificaciones.php" title="Página de clasificaciones">Clasificaciones</a>\n')
     outFile.write('      <a href="juegos.html" title="Página de juegos">Juegos</a>\n')
     outFile.write('      <a href="ayuda.html" title="Página de ayuda">Ayuda</a>\n')
     outFile.write('    </nav>\n')
@@ -70,10 +70,10 @@ def escribeHTML(outFile, root, ns):
     outFile.write(f'    <p>Vencedor: {ganador.text} ({tiempo.text})</p>\n')
 
     outFile.write('    <h3>Clasificación Mundial</h3>\n')
-    outFile.write('    <ul>\n')
+    outFile.write('    <ol>\n')
     for piloto in clasificacion:
         outFile.write(f'      <li>{piloto}</li>\n')
-    outFile.write('    </ul>\n')
+    outFile.write('    </ol>\n')
 
     outFile.write('    <h3>Referencias</h3>\n')
     outFile.write('    <ul>\n')
