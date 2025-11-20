@@ -47,9 +47,6 @@ class Circuito {
 
 class CargadorSVG {
 
-    constructor() {
-    }
-
     leerArchivoSVG(fichero) {
         if (fichero && fichero.type.match(/svg.*/)) {
             const lector = new FileReader();
@@ -74,9 +71,6 @@ class CargadorSVG {
 }
 
 class CargadorKML {
-    
-    constructor() {
-    }
 
     leerArchivoKML(fichero) {
         if (fichero && (fichero.type.match(/kml.*/) || fichero.name.toLowerCase().endsWith(".kml"))) { // En algunos navegadores el tipo MIME de KML puede no estar definido
