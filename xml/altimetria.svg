@@ -1,1 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">  <rect x="0" y="0" width="800" height="400" fill="white" stroke="black" stroke-width="3" />  <polyline points="50,390 50.00,307.78 64.58,285.20 79.17,273.43 93.75,240.99 108.33,214.42 122.92,193.07 137.50,172.39 152.08,112.14 166.67,100.57 181.25,74.76 195.83,66.41 210.42,50.00 225.00,59.11 239.58,87.76 254.17,122.49 268.75,147.44 283.33,168.79 297.92,175.05 312.50,165.28 327.08,137.95 341.67,132.64 356.25,141.27 370.83,149.43 385.42,158.54 400.00,171.63 414.58,181.02 429.17,194.12 443.75,239.09 458.33,247.91 472.92,267.84 487.50,273.06 502.08,313.47 516.67,318.60 531.25,321.25 545.83,325.81 560.42,344.21 575.00,350.00 589.58,347.15 604.17,347.15 618.75,344.88 633.33,337.10 647.92,334.35 662.50,337.19 677.08,342.22 691.67,341.75 706.25,338.24 720.83,337.19 735.42,318.03 750.00,307.78 750,390 50,390" style="fill:pink;stroke:red;stroke-width:2" />  <circle cx="50.00" cy="307.78" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="64.58" cy="285.20" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="79.17" cy="273.43" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="93.75" cy="240.99" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="108.33" cy="214.42" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="122.92" cy="193.07" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="137.50" cy="172.39" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="152.08" cy="112.14" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="166.67" cy="100.57" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="181.25" cy="74.76" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="195.83" cy="66.41" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="210.42" cy="50.00" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="225.00" cy="59.11" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="239.58" cy="87.76" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="254.17" cy="122.49" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="268.75" cy="147.44" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="283.33" cy="168.79" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="297.92" cy="175.05" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="312.50" cy="165.28" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="327.08" cy="137.95" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="341.67" cy="132.64" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="356.25" cy="141.27" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="370.83" cy="149.43" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="385.42" cy="158.54" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="400.00" cy="171.63" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="414.58" cy="181.02" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="429.17" cy="194.12" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="443.75" cy="239.09" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="458.33" cy="247.91" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="472.92" cy="267.84" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="487.50" cy="273.06" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="502.08" cy="313.47" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="516.67" cy="318.60" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="531.25" cy="321.25" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="545.83" cy="325.81" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="560.42" cy="344.21" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="575.00" cy="350.00" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="589.58" cy="347.15" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="604.17" cy="347.15" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="618.75" cy="344.88" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="633.33" cy="337.10" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="647.92" cy="334.35" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="662.50" cy="337.19" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="677.08" cy="342.22" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="691.67" cy="341.75" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="706.25" cy="338.24" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="720.83" cy="337.19" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="735.42" cy="318.03" r="2" fill="red" stroke="black" stroke-width="1" />  <circle cx="750.00" cy="307.78" r="2" fill="red" stroke="black" stroke-width="1" /></svg>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="2.0">
+  <rect x="0" y="0" width="800" height="400" fill="white" strokeWidth="3" stroke="white" />
+  <line x1="50" y1="350" x2="750" y2="350" stroke="black" strokeWidth="2" />
+  <line x1="50" y1="25.0" x2="50" y2="350" stroke="black" strokeWidth="2" />
+  <line x1="45" y1="350.0" x2="55" y2="350.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="355.0" fontFamily="Verdana" fontSize="12" style="fill:black;">49 m</text>
+  <line x1="45" y1="285.0" x2="55" y2="285.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="290.0" fontFamily="Verdana" fontSize="12" style="fill:black;">56 m</text>
+  <line x1="45" y1="220.0" x2="55" y2="220.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="225.0" fontFamily="Verdana" fontSize="12" style="fill:black;">62 m</text>
+  <line x1="45" y1="155.0" x2="55" y2="155.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="160.0" fontFamily="Verdana" fontSize="12" style="fill:black;">68 m</text>
+  <line x1="45" y1="90.0" x2="55" y2="90.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="95.0" fontFamily="Verdana" fontSize="12" style="fill:black;">75 m</text>
+  <line x1="45" y1="25.0" x2="55" y2="25.0" stroke="black" strokeWidth="1" />
+  <text x="0" y="30.0" fontFamily="Verdana" fontSize="12" style="fill:black;">81 m</text>
+  <polyline points="50,390 50.0,307.77988614800756 64.58333333333333,285.1992409867172 79.16666666666667,273.43453510436433 93.75,240.98671726755214 108.33333333333334,214.42125237191644 122.91666666666667,193.07400379506643 137.5,172.39089184060714 152.08333333333334,112.14421252371915 166.66666666666669,100.56925996204933 181.25,74.7628083491461 195.83333333333334,66.41366223908909 210.41666666666669,50.0 225.0,59.10815939278933 239.58333333333334,87.76091081593916 254.16666666666669,122.48576850094878 268.75,147.43833017077796 283.33333333333337,168.78557874762805 297.9166666666667,175.04743833017073 312.5,165.27514231499046 327.08333333333337,137.95066413662238 341.6666666666667,132.63757115749522 356.25,141.27134724857677 370.83333333333337,149.43074003795056 385.4166666666667,158.53889943074 400.0,171.63187855787473 414.58333333333337,181.0246679316887 429.1666666666667,194.1176470588235 443.75,239.08918406072098 458.33333333333337,247.9127134724857 472.9166666666667,267.83681214421244 487.5,273.05502846299805 502.08333333333337,313.4724857685009 516.6666666666667,318.59582542694494 531.25,321.25237191650854 545.8333333333334,325.8064516129032 560.4166666666667,344.212523719165 575.0,350.0 589.5833333333334,347.1537001897533 604.1666666666667,347.1537001897533 618.75,344.8766603415559 633.3333333333334,337.0967741935483 647.9166666666667,334.34535104364323 662.5,337.19165085388994 677.0833333333334,342.2201138519924 691.6666666666667,341.7457305502846 706.25,338.235294117647 720.8333333333334,337.19165085388994 735.4166666666667,318.0265654648956 750.0,307.77988614800756 750,390 50,390" stroke="red" strokeWidth="2" fill="pink" />
+  <circle cx="50.0" cy="307.77988614800756" r="2" fill="red" />
+  <circle cx="64.58333333333333" cy="285.1992409867172" r="2" fill="red" />
+  <circle cx="79.16666666666667" cy="273.43453510436433" r="2" fill="red" />
+  <circle cx="93.75" cy="240.98671726755214" r="2" fill="red" />
+  <circle cx="108.33333333333334" cy="214.42125237191644" r="2" fill="red" />
+  <circle cx="122.91666666666667" cy="193.07400379506643" r="2" fill="red" />
+  <circle cx="137.5" cy="172.39089184060714" r="2" fill="red" />
+  <circle cx="152.08333333333334" cy="112.14421252371915" r="2" fill="red" />
+  <circle cx="166.66666666666669" cy="100.56925996204933" r="2" fill="red" />
+  <circle cx="181.25" cy="74.7628083491461" r="2" fill="red" />
+  <circle cx="195.83333333333334" cy="66.41366223908909" r="2" fill="red" />
+  <circle cx="210.41666666666669" cy="50.0" r="2" fill="red" />
+  <circle cx="225.0" cy="59.10815939278933" r="2" fill="red" />
+  <circle cx="239.58333333333334" cy="87.76091081593916" r="2" fill="red" />
+  <circle cx="254.16666666666669" cy="122.48576850094878" r="2" fill="red" />
+  <circle cx="268.75" cy="147.43833017077796" r="2" fill="red" />
+  <circle cx="283.33333333333337" cy="168.78557874762805" r="2" fill="red" />
+  <circle cx="297.9166666666667" cy="175.04743833017073" r="2" fill="red" />
+  <circle cx="312.5" cy="165.27514231499046" r="2" fill="red" />
+  <circle cx="327.08333333333337" cy="137.95066413662238" r="2" fill="red" />
+  <circle cx="341.6666666666667" cy="132.63757115749522" r="2" fill="red" />
+  <circle cx="356.25" cy="141.27134724857677" r="2" fill="red" />
+  <circle cx="370.83333333333337" cy="149.43074003795056" r="2" fill="red" />
+  <circle cx="385.4166666666667" cy="158.53889943074" r="2" fill="red" />
+  <circle cx="400.0" cy="171.63187855787473" r="2" fill="red" />
+  <circle cx="414.58333333333337" cy="181.0246679316887" r="2" fill="red" />
+  <circle cx="429.1666666666667" cy="194.1176470588235" r="2" fill="red" />
+  <circle cx="443.75" cy="239.08918406072098" r="2" fill="red" />
+  <circle cx="458.33333333333337" cy="247.9127134724857" r="2" fill="red" />
+  <circle cx="472.9166666666667" cy="267.83681214421244" r="2" fill="red" />
+  <circle cx="487.5" cy="273.05502846299805" r="2" fill="red" />
+  <circle cx="502.08333333333337" cy="313.4724857685009" r="2" fill="red" />
+  <circle cx="516.6666666666667" cy="318.59582542694494" r="2" fill="red" />
+  <circle cx="531.25" cy="321.25237191650854" r="2" fill="red" />
+  <circle cx="545.8333333333334" cy="325.8064516129032" r="2" fill="red" />
+  <circle cx="560.4166666666667" cy="344.212523719165" r="2" fill="red" />
+  <circle cx="575.0" cy="350.0" r="2" fill="red" />
+  <circle cx="589.5833333333334" cy="347.1537001897533" r="2" fill="red" />
+  <circle cx="604.1666666666667" cy="347.1537001897533" r="2" fill="red" />
+  <circle cx="618.75" cy="344.8766603415559" r="2" fill="red" />
+  <circle cx="633.3333333333334" cy="337.0967741935483" r="2" fill="red" />
+  <circle cx="647.9166666666667" cy="334.34535104364323" r="2" fill="red" />
+  <circle cx="662.5" cy="337.19165085388994" r="2" fill="red" />
+  <circle cx="677.0833333333334" cy="342.2201138519924" r="2" fill="red" />
+  <circle cx="691.6666666666667" cy="341.7457305502846" r="2" fill="red" />
+  <circle cx="706.25" cy="338.235294117647" r="2" fill="red" />
+  <circle cx="720.8333333333334" cy="337.19165085388994" r="2" fill="red" />
+  <circle cx="735.4166666666667" cy="318.0265654648956" r="2" fill="red" />
+  <circle cx="750.0" cy="307.77988614800756" r="2" fill="red" />
+</svg>

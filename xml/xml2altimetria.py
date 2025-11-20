@@ -1,6 +1,32 @@
 import xml.etree.ElementTree as ET
 
-# Lee el XML y devuelve una lista de tuplas para coordenada: [(lat1, lon1, alt1), (lat2, lon2, alt2), ...]
+# Importamos la clase Svg (ejemplos de teoría, Tema 6: 02030-SVG.py)
+class Svg(object):
+    """Genera archivos SVG con rectángulos, círculos, líneas, polilíneas y texto"""
+    def __init__(self):
+        self.raiz = ET.Element('svg', xmlns="http://www.w3.org/2000/svg", version="2.0")
+
+    def addRect(self, x, y, width, height, fill, strokeWidth, stroke):
+        ET.SubElement(self.raiz, 'rect', x=x, y=y, width=width, height=height, fill=fill, strokeWidth=strokeWidth, stroke=stroke)
+
+    def addCircle(self, cx, cy, r, fill):
+        ET.SubElement(self.raiz, 'circle', cx=cx, cy=cy, r=r, fill=fill)
+
+    def addLine(self, x1, y1, x2, y2, stroke, strokeWidth):
+        ET.SubElement(self.raiz, 'line', x1=x1, y1=y1, x2=x2, y2=y2, stroke=stroke, strokeWidth=strokeWidth)
+
+    def addPolyline(self, points, stroke, strokeWidth, fill):
+        ET.SubElement(self.raiz, 'polyline', points=points, stroke=stroke, strokeWidth=strokeWidth, fill=fill)
+    def addText(self, texto, x, y, fontFamily, fontSize, style):
+        ET.SubElement(self.raiz, 'text', x=x, y=y, fontFamily=fontFamily, fontSize=fontSize, style=style).text = texto
+
+    def escribir(self, nombreArchivoSVG):
+        arbol = ET.ElementTree(self.raiz)
+        ET.indent(arbol)
+        arbol.write(nombreArchivoSVG, encoding='utf-8', xml_declaration=True)
+
+
+# Función para leer las coordenadas y altitudes del XML
 def parse_xml(xml_file):
     try:
         tree = ET.parse(xml_file)
@@ -13,112 +39,87 @@ def parse_xml(xml_file):
     coords_circuito = []
 
     # Coordenadas de inicio
-    coord_inic = root.find("ns:coordenadas_inicio/ns:coordenada", namespaces=ns)
+    coord_inic = root.find(".//ns:coordenadas_inicio/ns:coordenada", namespaces=ns)
     if coord_inic is not None:
         coords_circuito.append({
-            "lat": float(coord_inic.find("ns:latitud", namespaces=ns).text),
-            "lon": float(coord_inic.find("ns:longitud", namespaces=ns).text),
-            "alt": float(coord_inic.find("ns:altitud", namespaces=ns).text)
+            "lat": float(coord_inic.find(".//ns:latitud", namespaces=ns).text),
+            "lon": float(coord_inic.find(".//ns:longitud", namespaces=ns).text),
+            "alt": float(coord_inic.find(".//ns:altitud", namespaces=ns).text)
         })
 
     # Coordenadas de cada tramo
-    for tramo in root.findall("ns:tramos/ns:tramo", namespaces=ns):
-        coord_tramo = tramo.find("ns:coordenada", namespaces=ns)
+    for tramo in root.findall(".//ns:tramos/ns:tramo", namespaces=ns):
+        coord_tramo = tramo.find(".//ns:coordenada", namespaces=ns)
         if coord_tramo is not None:
             coords_circuito.append({
-                "lat": float(coord_tramo.find("ns:latitud", namespaces=ns).text),
-                "lon": float(coord_tramo.find("ns:longitud", namespaces=ns).text),
-                "alt": float(coord_tramo.find("ns:altitud", namespaces=ns).text),
+                "lat": float(coord_tramo.find(".//ns:latitud", namespaces=ns).text),
+                "lon": float(coord_tramo.find(".//ns:longitud", namespaces=ns).text),
+                "alt": float(coord_tramo.find(".//ns:altitud", namespaces=ns).text)
             })
-        
+
     return coords_circuito
 
-# Genera el contenido SVG para el circuito
-def crear_contenido_svg(coords_circuito, width=800, height=400, margin=50):
-    
+
+# Función para crear el SVG usando la clase Svg
+def crear_svg(coords_circuito, width=800, height=400, margin=50, ejeColor="black"):
     altitudes = [p['alt'] for p in coords_circuito]
     min_alt, max_alt = min(altitudes), max(altitudes)
     rango_alt = max_alt - min_alt
+    step_x = (width - 2*margin) / (len(coords_circuito)-1)
 
-    # Salto horizontal entre cada punto
-    step_x = (width - 2 * margin) / (len(coords_circuito) - 1)
+    # Utilizamos el objeto SVG del ejemplo de teoría
+    svg = Svg()
+    # Fondo blanco
+    svg.addRect('0', '0', str(width), str(height), 'white', '3', 'white')
 
-    # Cálculo de la posición vertical (altitud) en escalado
-    if rango_alt == 0:
-        y0 = height - margin
-    else:
-        escala = (0 - min_alt) / rango_alt
-        y = height - 2 * margin
-        y0 = (height - margin) - escala * y
+    # Ejes X e Y
+    eje_x_y = height - margin
+    svg.addLine(str(margin), str(eje_x_y), str(width-margin), str(eje_x_y), stroke=ejeColor, strokeWidth='2') # Eje X
+    svg.addLine(str(margin), str(margin/2), str(margin), str(eje_x_y), stroke=ejeColor, strokeWidth='2') # Eje Y
 
-    svg_lines = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        f'  <rect x="0" y="0" width="{width}" height="{height}" fill="white" stroke="black" stroke-width="3" />'
-    ]
+    # Marcas y etiquetas en el eje Y (altitud)
+    num_marcas_y = 5
+    for i in range(num_marcas_y + 1):
+        y_val = min_alt + i * (rango_alt / num_marcas_y)
+        y_pos = eje_x_y - (i * (height - margin*1.5)/num_marcas_y)
+        svg.addLine(str(margin-5), str(y_pos), str(margin+5), str(y_pos), stroke=ejeColor, strokeWidth='1')
+        svg.addText(f"{y_val:.0f} m", str(margin-50), str(y_pos+5), fontSize="12", fontFamily="Verdana", style="fill:black;")
 
-    # Inicio en (margin, height) => Esquina inferior izquierda + márgenes
+    # Generar polilínea del perfil
     points = []
-
     for i, p in enumerate(coords_circuito):
         x = margin + i * step_x
+        escala = (p['alt'] - min_alt) / rango_alt if rango_alt != 0 else 0
+        y = (height - margin) - escala * (height - 2*margin)
+        points.append(f"{x},{y}")
 
-        if rango_alt == 0:
-            y = height - margin
-        else:
-            escala = (p['alt'] - min_alt) / rango_alt
-            y = height - 2 * margin
-            y0 = (height - margin) - escala * y
-
-        points.append(f"{x:.2f},{y0:.2f}")
-
-    # Punto final de la base y cierre de perfil
+    # Cerrar polilínea ("suelo" del gráfico)
     base_y = height - 10
-    pts = [f"{margin},{base_y}"] + points + [f"{width-margin},{base_y}", f"{margin},{base_y}"]
-    pts_str = " ".join(pts)
-    svg_lines.append(
-        f'  <polyline points="{pts_str}" '
-        'style="fill:pink;stroke:red;stroke-width:2" />'
-    )
+    points_str = f"{margin},{base_y} " + " ".join(points) + f" {width-margin},{base_y} {margin},{base_y}"
+    svg.addPolyline(points_str, stroke='red', strokeWidth='2', fill='pink')
 
-    # Marcadores de los puntos tomados para definir los tramos
+    # Dibujar círculos en los puntos
     for i, p in enumerate(coords_circuito):
-        x = margin + i*step_x
+        x = margin + i * step_x
+        escala = (p['alt'] - min_alt) / rango_alt if rango_alt != 0 else 0
+        y = (height - margin) - escala * (height - 2*margin)
+        svg.addCircle(str(x), str(y), '2', 'red')
 
-        if rango_alt == 0:
-            y = height - margin
-        else:
-            escala = (p['alt'] - min_alt) / rango_alt
-            y = (height - margin) - escala * (height - 2 * margin)
-        svg_lines.append(
-            f'  <circle cx="{x:.2f}" cy="{y:.2f}" r="2" '
-            'fill="red" stroke="black" stroke-width="1" />'
-        )
+    return svg
 
-    svg_lines.append('</svg>')
 
-    return svg_lines
-
-# Guarda el contenido SVG en un archivo
-def save_svg(svg_content, svg_file):
-    try:
-        with open(svg_file, 'w', encoding='utf-8') as f:
-            for line in svg_content:
-                f.write(line)
-    except IOError as e:
-        print(f"Error al guardar '{svg_file}': {e}")
-
-# Función principal que orquesta el proceso de conversión de XML a SVG
+# Función principal
 def main():
     xml_file = "circuitoEsquema.xml"
-    coordinates = parse_xml(xml_file)
-    if not coordinates:
-        print("No se ha podido extraer el circuito del archivo.")
+    coords_circuito = parse_xml(xml_file)
+    if not coords_circuito:
+        print("No se pudo extraer datos del XML.")
         return
 
-    svg = crear_contenido_svg(coordinates)
-    save_svg(svg, "altimetria.svg")
-    print(f"Conversión completada con éxito: altimetria.svg creado.")
+    svg = crear_svg(coords_circuito)
+    svg.escribir("altimetria.svg")
+    print("SVG generado correctamente: altimetria.svg")
+
 
 if __name__ == "__main__":
     main()

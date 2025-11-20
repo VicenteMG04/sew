@@ -164,11 +164,12 @@ main article:nth-of-type(3) h3 + div {
     height: 75vh;
 }
 
+/* Especificidad del selector: 001 */
 svg {
     display: block;
-    margin: 2% auto;
-    width: 60%;
-    height: auto;
+    margin: auto;
+    width: 80%;
+    height: 50vh;
 }
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */

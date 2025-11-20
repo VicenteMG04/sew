@@ -56,19 +56,19 @@ def main():
     with open(kml_filename, "w", encoding="utf-8") as outFile:
         prologoKML(outFile)
 
-        coord_inic = root.find("ns:coordenadas_inicio/ns:coordenada", namespaces=ns)
+        coord_inic = root.find(".//ns:coordenadas_inicio/ns:coordenada", namespaces=ns)
         coords_line = []
         if coord_inic is not None:
-            lon_inic = coord_inic.find("ns:longitud", namespaces=ns).text
-            lat_inic = coord_inic.find("ns:latitud", namespaces=ns).text
+            lon_inic = coord_inic.find(".//ns:longitud", namespaces=ns).text
+            lat_inic = coord_inic.find(".//ns:latitud", namespaces=ns).text
             coords_line.append((lon_inic, lat_inic))
             escribePunto(outFile, "Línea de salida", lon_inic, lat_inic)
 
-        for tramo in root.findall("ns:tramos/ns:tramo", namespaces=ns):
-            coord_tramo = tramo.find("ns:coordenada", namespaces=ns)
+        for tramo in root.findall(".//ns:tramos/ns:tramo", namespaces=ns):
+            coord_tramo = tramo.find(".//ns:coordenada", namespaces=ns)
             if coord_tramo is not None:
-                lon_tramo = coord_tramo.find("ns:longitud", namespaces=ns).text
-                lat_tramo = coord_tramo.find("ns:latitud", namespaces=ns).text
+                lon_tramo = coord_tramo.find(".//ns:longitud", namespaces=ns).text
+                lat_tramo = coord_tramo.find(".//ns:latitud", namespaces=ns).text
                 coords_line.append((lon_tramo, lat_tramo))
                 # escribePunto(outFile, lon_tramo, lat_tramo)
 
