@@ -13,6 +13,7 @@ def prologoHTML(outFile):
     outFile.write('  <title>MotoGp - Circuito de Le Mans</title>\n')
     outFile.write('  <link rel="stylesheet" type="text/css" href="estilo/estilo.css">\n')
     outFile.write('  <link rel="stylesheet" type="text/css" href="estilo/layout.css">\n')
+    outFile.write('  <script src="js/menu.js"></script>\n')
     outFile.write('</head>\n')
     outFile.write('<body>\n')
     outFile.write('  <header>\n')

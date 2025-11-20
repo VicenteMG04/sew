@@ -65,8 +65,8 @@ class CargadorSVG {
         const parser = new DOMParser();
         const documentoSVG = parser.parseFromString(svgTexto, 'image/svg+xml');
         const elementoSVG = documentoSVG.documentElement;
-        const contenedor = document.querySelector("main article:nth-of-type(2) svg");
-        contenedor.replaceWith(elementoSVG);
+        const padre = document.querySelector("main article:nth-of-type(2)");
+        padre.appendChild(elementoSVG);
     }
 }
 
@@ -110,7 +110,10 @@ class CargadorKML {
             return;
         }
 
-        const contenedor = document.querySelector("main article:nth-of-type(3) div");
+        const padre = document.querySelector("main article:nth-of-type(3)");
+        const contenedor = document.createElement("div");
+        padre.appendChild(contenedor);
+
         const mapa = new google.maps.Map(contenedor, {
             center: { lat: 47.953839, lng: 0.210905 }, // Mapa centrado en el centro del circuito
             zoom: 15,

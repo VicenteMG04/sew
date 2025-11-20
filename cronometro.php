@@ -55,6 +55,7 @@
     <title>MotoGP - Cronómetro PHP</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <script src="js/menu.js"></script>
 </head>
 
 <body>

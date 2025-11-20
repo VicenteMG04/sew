@@ -156,12 +156,19 @@ main h3 ~ article {
     padding: 0.5em 2em 1.5em;
 }
 
-/* Especificidad del selector: 003 */
-article h3 + div {
+/* Especificidad del selector: 014 */
+main article:nth-of-type(3) h3 + div {
     display: block;
     margin: auto;
     width: 75%;
     height: 75vh;
+}
+
+svg {
+    display: block;
+    margin: 2% auto;
+    width: 60%;
+    height: auto;
 }
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */

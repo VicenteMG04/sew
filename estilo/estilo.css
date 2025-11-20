@@ -154,14 +154,6 @@ main h3 ~ article {
     border-radius: 0.5em;
 }
 
-/* Especificidad del selector: 001 */
-svg {
-    display: block;
-    margin: auto;
-    width: 60%;
-    height: auto;
-}
-
 /* Especificidad del selector: 002 */
 div img {
     box-shadow: none;
