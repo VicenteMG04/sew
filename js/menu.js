@@ -16,13 +16,19 @@ class Menu {
             if (window.innerWidth >= 769) {
                 menu.hidden = false;
                 boton.setAttribute("aria-expanded", "true");
-            } 
+            } else {
+                menu.hidden = true;
+                boton.setAttribute("aria-expanded", "false");
+            }
             
             // Reset automático al cambiar tamaño de ventana para "trackear" cuando se debe mostrar el menú
             window.addEventListener("resize", () => {
                 if (window.innerWidth >= 769) {
                     menu.hidden = false;
                     boton.setAttribute("aria-expanded", "true");
+                } else {
+                    menu.hidden = true;
+                    boton.setAttribute("aria-expanded", "false");
                 }
             });
         });

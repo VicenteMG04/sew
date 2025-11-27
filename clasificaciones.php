@@ -29,6 +29,7 @@
     <meta name="keywords" content="MotoGP, aplicación, carreras, motos, clasificaciones" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP - Clasificaciones</title>
+    <link rel="icon" href="multimedia/favicon.ico" sizes="48x48">
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
     <script src="js/menu.js"></script>
