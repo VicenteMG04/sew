@@ -158,3 +158,19 @@ main h3 ~ article {
 div img {
     box-shadow: none;
 }
+
+/* Especificidad del selector: 001 */
+form {
+    border: 0.2em solid #0910A0;
+    border-radius: 0.2em;
+}
+
+/* Especificidad del selector: 002 */
+form input {
+    border: 0.1em solid #000000;
+}
+
+/* Especificidad del selector: 012 */
+form button:hover {
+    color: #0910A0; /* Advertencia controlada: Color de fondo (background) heredado de button definido en estilo.css */
+}

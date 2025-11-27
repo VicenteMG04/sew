@@ -14,10 +14,10 @@ header {
     justify-content: space-evenly;
 }
 
-/* Especificidad del selector: 002 */
-header h1 {
+/* Especificidad del selector: 001 */
+h1 {
     flex: 1;
-    margin: 1%;
+    margin: 2%;
 }
 
 /* Especificidad del selector: 001 */
@@ -46,8 +46,9 @@ main {
     margin-right: 3%;
 }
 
-/* Especificidad del selector: 002 */
-header + p {
+/* Especificidad del selector: 002 | 002 */
+header + p,
+h1 + p {
     margin: 2%;
 }
 
@@ -170,6 +171,37 @@ svg {
     margin: auto;
     width: 80%;
     height: 50vh;
+}
+
+/* Especificidad del selector: 001 */
+form {
+    width: 80%;
+    margin: auto;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Especificidad del selector: 002 */
+form label {
+    width: 100%;
+    margin: 0.5em 0;
+    align-self: flex-start;
+}
+
+/* Especificidad del selector: 002 */
+form input {
+    margin: 1em 0;
+    padding: 1%;
+    width: 100%;
+}
+
+/* Especificidad del selector: 002 */
+form button {
+    margin: 1em;
+    padding: 1em;
+    align-self: center;
 }
 
 /* Media queries aplicadas: Distribución de contenidos (flex-direction: column en el header), dimensionado, y supresión de migas (en móviles) */
