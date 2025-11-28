@@ -39,15 +39,21 @@
         </script>
         <h2>Circuito: Le Mans</h2>
         <article>
-            <h3>Carga de información del ciruito: <input type="file" accept=".html" onchange=circuito.leerArchivoHTML(this.files[0])></h3>
+            <h3>Información del circuito</h3>
+            <label for="archivoHTML">Carga de información del ciruito: </label>
+            <input type="file" id="archivoHTML" accept=".html" onchange=circuito.leerArchivoHTML(this.files[0]) />
             <!-- Primera apartado, se cubrirá con los datos del documento InfoCircuito.html -->
         </article>
         <article>
-            <h3>Carga del SVG con la altimetría del circuito: <input type="file" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0])></h3>
+            <h3>Altimetría del circuito</h3>
+            <label for="archivoSVG">Carga del SVG con la altimetría del circuito: </label>
+            <input type="file" id="archivoSVG" accept=".svg" onchange=svg.leerArchivoSVG(this.files[0]) />
             <!-- Aquí se volcará el contenido del SVG -->
         </article>
         <article>
-            <h3>Carga del KML con la planimetría del circuito: <input type="file" accept=".kml" onchange=kml.leerArchivoKML(this.files[0])></h3>
+            <h3>Planimetría del circuito</h3>
+            <label for="archivoKML">Carga del KML con la planimetría del circuito: </label>
+            <input type="file" id="archivoKML" accept=".kml" onchange=kml.leerArchivoKML(this.files[0]) />
             <!-- Aquí se volcará el contenido del KML --> <!-- Caso excepcional de uso de bloque dinámico div -->
         </article>
     </main>

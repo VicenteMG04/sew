@@ -191,25 +191,35 @@
 <body>
     <h1>Test</h1>
     <form method="post">
-        <label>¿Cuántos años tiene el piloto murciano de MotoGP Fermín Aldeguer? (en diciembre de 2025): <input type="text" name="pregunta1" placeholder="Respuesta a la pregunta 1" required /></label>
+        <label for="pregunta1">¿Cuántos años tiene el piloto murciano de MotoGP Fermín Aldeguer? (en diciembre de 2025): </label>
+        <input type="text" id="pregunta1" name="pregunta1" placeholder="Respuesta a la pregunta 1" required />
         
-        <label>¿Qué dorsal utiliza Fermín Aldeguer en su primera temporada en MotoGP?: <input type="text" name="pregunta2" placeholder="Respuesta a la pregunta 2" required /></label>
+        <label for="pregunta2">¿Qué dorsal utiliza Fermín Aldeguer en su primera temporada en MotoGP?: </label>
+        <input type="text" id="pregunta2" name="pregunta2" placeholder="Respuesta a la pregunta 2" required />
 
-        <label>¿Cuántas vueltas duró la carrera del Gran Premio de Le Mans de la temporada de 2025?: <input type="text" name="pregunta3" placeholder="Respuesta a la pregunta 3" required /></label>
+        <label for="pregunta3">¿Cuántas vueltas duró la carrera del Gran Premio de Le Mans de la temporada de 2025?: </label>
+        <input type="text" id="pregunta3" name="pregunta3" placeholder="Respuesta a la pregunta 3" required />
 
-        <label>¿Quién fue el vencedor de la carrera del Gran Premio de Le Mans de la temporada de 2025?: <input type="text" name="pregunta4" placeholder="Respuesta a la pregunta 4" required /></label>
+        <label for="pregunta4">¿Quién fue el vencedor de la carrera del Gran Premio de Le Mans de la temporada de 2025?: </label>
+        <input type="text" id="pregunta4" name="pregunta4" placeholder="Respuesta a la pregunta 4" required />
 
-        <label>¿En qué país europeo se encuentra el circuito de Le Mans?: <input type="text" name="pregunta5" placeholder="Respuesta a la pregunta 5" required /></label>
+        <label for="pregunta5">¿En qué país europeo se encuentra el circuito de Le Mans?: </label>
+        <input type="text" id="pregunta5" name="pregunta5" placeholder="Respuesta a la pregunta 5" required />
     
-        <label>¿Qué piloto era el líder del mundial de MotoGP tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: <input type="text" name="pregunta6" placeholder="Respuesta a la pregunta 6" required /></label>
+        <label for="pregunta6">¿Qué piloto era el líder del mundial de MotoGP tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: </label>
+        <input type="text" id="pregunta6" name="pregunta6" placeholder="Respuesta a la pregunta 6" required />
 
-        <label>¿Llovió durante el fin de semana del Gran Premio de Le Mans de la temporada de 2025?: <input type="text" name="pregunta7" placeholder="Respuesta a la pregunta 7" required /></label>
+        <label for="pregunta7">¿Llovió durante el fin de semana del Gran Premio de Le Mans de la temporada de 2025?: </label>
+        <input type="text" id="pregunta7" name="pregunta7" placeholder="Respuesta a la pregunta 7" required />
 
-        <label>¿Con qué término inglés se conoce a la penalización que obliga a un piloto a realizar un recorrido más largo durante una carrera de MotoGP?: <input type="text" name="pregunta8" placeholder="Respuesta a la pregunta 8" required /></label>
+        <label for="pregunta8">¿Con qué término inglés se conoce a la penalización que obliga a un piloto a realizar un recorrido más largo durante una carrera de MotoGP?: </label>
+        <input type="text" id="pregunta8" name="pregunta8" placeholder="Respuesta a la pregunta 8" required />
 
-        <label>¿Cuántos puntos de diferencia había entre el líder del mundial de MotoGP y el segundo clasificado tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: <input type="text" name="pregunta9" placeholder="Respuesta a la pregunta 9" required /></label>
+        <label for="pregunta9">¿Cuántos puntos de diferencia había entre el líder del mundial de MotoGP y el segundo clasificado tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: </label>
+        <input type="text" id="pregunta9" name="pregunta9" placeholder="Respuesta a la pregunta 9" required />
         
-        <label>¿En qué posición finalizó Fermín Aldeguer la temporada 2024 en el mundial de pilotos de Moto2?: <input type="text" name="pregunta10" placeholder="Respuesta a la pregunta 10" required /></label>
+        <label for="pregunta10">¿En qué posición finalizó Fermín Aldeguer la temporada 2024 en el mundial de pilotos de Moto2?: </label>
+        <input type="text" id="pregunta10" name="pregunta10" placeholder="Respuesta a la pregunta 10" required />   
 
         <button type="submit" name="terminarPrueba">Terminar prueba</button>
     </form>

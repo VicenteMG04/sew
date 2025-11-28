@@ -14,10 +14,12 @@ class Circuito {
     }
 
     leerArchivoHTML(fichero) {
-        // Limpiar primero el contenido previo sin borrar el encabezado h2 ni el selector de archivos
+        // Limpiar primero el contenido previo sin borrar el encabezado ni el selector de archivos
         const contenedor = document.querySelector("main article:nth-of-type(1)");
+        const h3 = contenedor.querySelector("h3");
         const inputFile = contenedor.querySelector("input");
         contenedor.innerHTML = "";
+        contenedor.appendChild(h3);
         contenedor.appendChild(inputFile);
         
         var tipoFichero = /html.*/;
