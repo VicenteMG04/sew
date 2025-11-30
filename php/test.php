@@ -1,40 +1,63 @@
 <?php
-    define('CRONOMETRO_SIN_HTML', true); // cronometro.php no genererará HTML
+    define("CRONOMETRO_SIN_HTML", true); // cronometro.php no genererará HTML
     include_once("../cronometro.php");
     
     class Test {
-        protected $server = 'localhost';
-        protected $user = 'DBUSER2025';
-        protected $pass = 'DBPSWD2025';
-        protected $dbname = 'uo294013_db';
+        protected $server = "localhost";
+        protected $user = "DBUSER2025";
+        protected $pass = "DBPSWD2025";
+        protected $dbname = "uo294013_db";
 
         protected $conn = null;
 
         protected $respuestasCorrectas = [
             1 => ["20", "veinte"],
-            2 => ["54", "cincuenta y cuatro", "cincuenta y cuatro"],
+            2 => ["54", "cincuenta y cuatro"],
             3 => ["27", "veintisiete"],
             4 => ["johann zarco", "zarco"],
             5 => ["francia"],
-            6 => ["marc márquez", "marc marquez"],
-            7 => ["sí", "si"],
-            8 => ["22", "veintidós", "veintidos"],
+            6 => ["marc marquez"],
+            7 => ["si"],
+            8 => ["22", "veintidos"],
             9 => ["long lap", "longlap"],
             10 => ["5º", "5", "quinto", "5o"]
         ];
 
-        // Constructor de la clase PHP test, encargado de conectar con la BD e inicializar el estado del test
+        // Constructor de la clase PHP test, encargado de inicializar el estado del test
         public function __construct() {
             // Conectar a BD (si falla, lo informamos pero no morimos)
-            $this->conn = @new mysqli($this->server, $this->user, $this->pass, $this->dbname);
-            if ($this->conn && $this->conn->connect_error) {
-                echo "<p>Error de conexión con la base de datos: " . htmlspecialchars($this->conn->connect_error)."</p>";
-                $this->conn = null;
+            if (!isset($_SESSION["estadoTest"])) {
+                $_SESSION["estadoTest"] = "inicio";
+            }
+        }
+
+        // Función auxiliar para obtener la conexión a la base de datos
+        protected function getConn() {
+            if ($this->conn !== null) {
+                return $this->conn;
             }
 
-            if (!isset($_SESSION['estadoTest'])) {
-                $_SESSION['estadoTest'] = 'inicio';
+            $this->conn = new mysqli($this->server, $this->user, $this->pass, $this->dbname);
+            if ($this->conn->connect_errno) {
+                throw new Exception("Error conexión BD: " . $this->conn->connect_error);
             }
+
+            $this->conn->set_charset("utf8mb4");
+            return $this->conn;
+        }
+
+        // Función auxiliar para normalizar las strings de las respuestas (minúsculas, tildes, y espacios)
+        protected function normalize(string $s): string {
+            $s = mb_strtolower(trim($s), "UTF-8");
+            $map = [
+                "á"=>"a","é"=>"e","í"=>"i","ó"=>"o","ú"=>"u",
+                "à"=>"a","è"=>"e","ì"=>"i","ò"=>"o","ù"=>"u",
+                "ä"=>"a","ë"=>"e","ï"=>"i","ö"=>"o","ü"=>"u",
+                "ñ"=>"n"
+            ];
+            $s = strtr($s, $map);
+            $s = preg_replace('/\s+/', " ", $s);
+            return $s;
         }
 
         // Función para iniciar la prueba, creando el cronómetro (no se mostrará) y cambiando el estado del test
@@ -48,29 +71,38 @@
         public function terminarPreguntas(array $post) : void {
             $resp = [];
             foreach ($post as $k => $v) {
-                if (str_starts_with($k, 'pregunta')) {
+                if (str_starts_with($k, "pregunta")) {
                     $resp[$k] = trim((string)$v);
                 }
             }
-            $_SESSION['respuestasUsuario'] = $resp;
+            $_SESSION["respuestasUsuario"] = $resp;
 
-            if (isset($_SESSION['cronometro'])) {
-                $_SESSION['cronometro']->parar();
-                // Método obtenerDuracion creado para esta sesión específica (devuelve HH:MM:SS.mmm)
-                $_SESSION['tiempo'] = $_SESSION['cronometro']->getTiempoBD();
+            if (isset($_SESSION["cronometro"])) {
+                $_SESSION["cronometro"]->parar();
+                // Método creado en cronometro.php para esta sesión específica (devuelve HH:MM:SS.mmm)
+                $_SESSION["tiempo"] = $_SESSION["cronometro"]->getTiempoBD();
             } else {
-                $_SESSION['tiempo'] = "00:00:00.000";
+                $_SESSION["tiempo"] = "00:00:00.000";
             }
 
-            $_SESSION['estadoTest'] = 'formularioFinal';
+            $resultado = $this->evaluar();
+            $correctas = 0;
+            foreach ($resultado as $v) {
+                if ($v) {
+                    $correctas++;
+                }
+            }
+            $_SESSION["nota"] = $correctas;
+
+            $_SESSION["estadoTest"] = "formularioFinal";
         }
 
         // Función para evaluar las respuestas del usuario y devolver un array con los resultados
         public function evaluar() : array {
             $resultado = [];
-            $respuestasUsuario = $_SESSION['respuestasUsuario'] ?? [];
+            $respuestasUsuario = $_SESSION["respuestasUsuario"] ?? [];
             
-            foreach ($this->respuestasCorrectas as $numPregunta => $opciones) {
+            foreach ($this->respuestasCorrectas as $numPregunta => $soluciones) {
                 $clave = "pregunta".$numPregunta;
 
                 if (!isset($respuestasUsuario[$clave])) {
@@ -78,8 +110,9 @@
                     continue;
                 }
 
-                $respuestaUsuario = strtolower(trim($_SESSION["respuestasUsuario"][$clave]));
-                $resultado[$numPregunta] = in_array($respuestaUsuario, array_map("strtolower", $opciones));
+                $respuesta = $this->normalize($respuestasUsuario[$clave]);
+                $solucionesNorm = array_map([$this, "normalize"], $soluciones);
+                $resultado[$numPregunta] = in_array($respuesta, $solucionesNorm, true);
             }
 
             return $resultado;
@@ -87,22 +120,24 @@
 
         // Función para guardar el resultado del test en la base de datos
         public function guardarResultado(array $post): bool {
-            if (!$this->conn) {
-                echo "<p>No hay conexión a la base de datos.</p>";
+            try { 
+                $this->getConn();
+            } catch (Exception $e) {
+                echo "<p>Error al conectar con la base de datos: " . htmlspecialchars($e->getMessage())."</p>";
                 return false;
             }
 
             // Extraer y validar
-            $codigo = isset($post['codigo']) ? intval($post['codigo']) : 0;
+            $codigo = isset($post["codigo"]) ? intval($post["codigo"]) : 0;
             if ($codigo <= 0 || $codigo > 12) {
                 echo "<p>ID de usuario inválido. Introduce un valor entre 1 y 12.</p>";
                 return false;
             }
 
-            $profesion = trim($post['profesion'] ?? '');
-            $edad = isset($post['edad']) ? intval($post['edad']) : null;
-            $genero = trim($post['genero'] ?? '');
-            $pericia = isset($post['pericia']) ? intval($post['pericia']) : null;
+            $profesion = trim($post["profesion"] ?? "");
+            $edad = isset($post["edad"]) ? intval($post["edad"]) : null;
+            $genero = trim($post["genero"] ?? "");
+            $pericia = isset($post["pericia"]) ? intval($post["pericia"]) : null;
             if ($pericia === null || $pericia < 0) {
                 $pericia = 0;
             }
@@ -110,11 +145,11 @@
                 $pericia = 10;
             }
 
-            $dispositivo = trim($post['dispositivo'] ?? '');
-            $tiempoSQL = $_SESSION['tiempo'] ?? "00:00:00.000";
-            $comentarios = trim($post['comentarios'] ?? '');
-            $propuestas = trim($post['propuestas'] ?? '');
-            $valoracion = isset($post['valoracion']) ? intval($post['valoracion']) : 0;
+            $dispositivo = trim($post["dispositivo"] ?? "");
+            $tiempoSQL = $_SESSION["tiempo"] ?? "00:00:00.000";
+            $comentarios_usuario = trim($post["comentarios_usuario"] ?? "");
+            $propuestas = trim($post["propuestas"] ?? "");
+            $valoracion = isset($post["valoracion"]) ? intval($post["valoracion"]) : 0;
             if ($valoracion < 0) {
                 $valoracion = 0;
             }
@@ -122,7 +157,7 @@
                 $valoracion = 10;
             }
 
-            $obs_facilitador = trim($post['obs_facilitador'] ?? '');
+            $comentarios_obs = trim($post["comentarios_obs"] ?? "");
 
             // Iniciar transacción
             $this->conn->begin_transaction();
@@ -163,23 +198,23 @@
                     throw new Exception($this->conn->error);
                 }
                 // Tipos: i s s i s s i => "ississi"
-                $stmt->bind_param("ississi", $codigo, $dispositivo, $tiempoSQL, $completada, $comentarios, $propuestas, $valoracion);
+                $stmt->bind_param("ississi", $codigo, $dispositivo, $tiempoSQL, $completada, $comentarios_usuario, $propuestas, $valoracion);
                 $stmt->execute();
                 $stmt->close();
 
-                // 3) Tabla observaciones: insertar
+                // 3) Tabla observaciones: insertar (id_usuario, comentarios)
                 $stmt = $this->conn->prepare("INSERT INTO observaciones (id_usuario, comentarios) VALUES (?, ?)");
                 if (!$stmt) {
                     throw new Exception($this->conn->error);
                 }
-                $stmt->bind_param("is", $codigo, $obs_facilitador);
+                $stmt->bind_param("is", $codigo, $comentarios_obs);
                 $stmt->execute();
                 $stmt->close();
 
                 $this->conn->commit();
 
-                unset($_SESSION['respuestasUsuario'], $_SESSION['cronometro'], $_SESSION['tiempoSegundos']);
-                $_SESSION['estadoTest'] = 'fin';
+                unset($_SESSION['respuestasUsuario'], $_SESSION['cronometro'], $_SESSION['tiempo'], $_SESSION['nota']);
+                $_SESSION["estadoTest"] = "fin";
 
                 return true;
             } catch (Exception $e) {
@@ -199,7 +234,8 @@
                     <form method="post">
                         <p>Cuando estés preparado, pulsa el siguiente botón para iniciar la prueba:</p>
                         <button name="iniciar" type="submit">Iniciar prueba</button>
-                    </form>';
+                    </form>
+                ';
                 return;
             }
 
@@ -228,17 +264,19 @@
                         <label for="pregunta7">¿Llovió durante el fin de semana del Gran Premio de Le Mans de la temporada de 2025?: </label>
                         <input type="text" id="pregunta7" name="pregunta7" placeholder="Respuesta a la pregunta 7" required />
 
-                        <label for="pregunta8">¿Con qué término inglés se conoce a la penalización que obliga a un piloto a realizar un recorrido más largo durante una carrera de MotoGP?: </label>
+                        <label for="pregunta8">¿Cuántos puntos de diferencia había entre el líder del mundial de MotoGP y el segundo clasificado tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: </label>
                         <input type="text" id="pregunta8" name="pregunta8" placeholder="Respuesta a la pregunta 8" required />
 
-                        <label for="pregunta9">¿Cuántos puntos de diferencia había entre el líder del mundial de MotoGP y el segundo clasificado tras la celebración del Gran Premio de Le Mans de la temporada de 2025?: </label>
+                        <label for="pregunta9">¿Con qué término inglés se conoce a la penalización que obliga a un piloto a realizar un recorrido más largo durante una carrera de MotoGP?: </label>
                         <input type="text" id="pregunta9" name="pregunta9" placeholder="Respuesta a la pregunta 9" required />
                         
                         <label for="pregunta10">¿En qué posición finalizó Fermín Aldeguer la temporada 2024 en el mundial de pilotos de Moto2?: </label>
                         <input type="text" id="pregunta10" name="pregunta10" placeholder="Respuesta a la pregunta 10" required />   
 
                         <button type="submit" name="terminar">Terminar prueba</button>
-                    </form>';
+                    </form>
+                ';
+
                 return;
             }
 
@@ -274,28 +312,35 @@
                             <label for="valoracion">Valoración de la aplicación (0-10):</label>
                             <input type="number" id="valoracion" name="valoracion" min="0" max="10" required />
 
-                            <label for="comentarios">Comentarios del usuario:</label>
-                            <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+                            <label for="comentarios_usuario">Comentarios del usuario:</label>
+                            <textarea id="comentarios_usuario" name="comentarios_usuario"></textarea>
 
                             <label for="propuestas">Propuestas de mejora:</label>
-                            <textarea id="propuestas" name="propuestas" rows="4"></textarea>
+                            <textarea id="propuestas" name="propuestas"></textarea>
                         </fieldset>
 
                         <fieldset>
-                            <legend>Observaciones del facilitador</legend>
+                            <legend>Observaciones</legend>
 
-                            <label for="obs_facilitador">Observaciones del facilitador:</label>
-                            <textarea id="obs_facilitador" name="obs_facilitador" rows="5"></textarea>
+                            <label for="comentarios_obs">Comentarios del facilitador:</label>
+                            <textarea id="comentarios_obs" name="comentarios_obs"></textarea>
                         </fieldset>
 
                         <button name="guardar" type="submit">Guardar prueba</button>
-                    </form>';
+                    </form>
+                ';
                 return;
             }
 
             // ESTADO 4: FIN
             if ($estado === "fin") {
                 echo "<p>La prueba ha sido registrada correctamente.</p>";
+
+                session_unset();
+                session_regenerate_id(true);
+
+                $_SESSION["estadoTest"] = "inicio";
+                return;
             }
         }
     }
@@ -307,20 +352,21 @@
 
         if (isset($_POST["iniciar"])) {
             $test->iniciarPrueba();
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER["PHP_SELF"]);
             exit;
         }
 
         if (isset($_POST["terminar"])) {
             $test->terminarPreguntas($_POST);
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER["PHP_SELF"]);
             exit;
         }
 
         if (isset($_POST["guardar"])) {
-            $ok = $test->guardarResultado($_POST);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-            exit;
+            if ($test->guardarResultado($_POST)) {
+                header("Location: " . $_SERVER["PHP_SELF"]);
+                exit;
+            }
         }
     }
 ?>
@@ -341,5 +387,27 @@
 <body>
     <h1>Test</h1>
     <?php $test->mostrarFormulario(); ?>
+    <dialog>
+        <p></p>
+        <button>Continuar</button>
+    </dialog>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dialog = document.querySelector("dialog");
+            const mensaje = dialog.querySelector("dialog p");
+            const btn = dialog.querySelector("dialog button");
+
+            // La nota llega desde PHP por sesión al cargar estado "formularioFinal"
+            <?php if (isset($_SESSION["estadoTest"]) && $_SESSION["estadoTest"] === "formularioFinal") : ?>
+                mensaje.textContent = "Has acertado <?php echo $_SESSION['nota']; ?> de 10 preguntas.";
+                dialog.showModal();
+
+                btn.addEventListener("click", () => {
+                    dialog.close();
+                });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>

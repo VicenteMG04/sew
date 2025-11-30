@@ -294,7 +294,7 @@ form input {
     border: 0.1em solid #000000;
     margin: 1em 0;
     padding: 1%;
-    width: 100%;
+    width: 95%;
 }
 
 /* Especificidad del selector: 002 */
@@ -303,9 +303,30 @@ form button {
     padding: 1em;
 }
 
-/* Especificidad del selector: 012 */
-form button:hover {
+/* Especificidad del selector: 011 */
+button:hover {
     color: #0910A0; /* Advertencia controlada: Color de fondo (background) heredado de button definido en estilo.css */
+}
+
+/* Especificidad del selector: 001 */
+fieldset {
+    margin: 1%;
+    padding: 1%;
+    width: 100%;
+}
+
+/* Especificidad del selector: 001 */
+textarea {
+    border: 0.1em solid #000000;
+    padding: 1%;
+    width: 95%;
+    resize: none;
+}
+
+dialog button {
+    width: 100%;
+    margin: auto;
+    padding: 0.8em;
 }
 
 /* Media queries aplicadas: redimensionado de fuentes y tamaño de elementos */
