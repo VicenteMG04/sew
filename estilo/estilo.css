@@ -23,6 +23,12 @@ body {
     font-size: 1em;
     color: #000000;
     background-color: #FFFFFF;
+    margin: 0;
+}
+
+/* Especificidad del selector: 001 */
+h1 {
+    margin: 2%;
 }
 
 /* Especificidad del selector: 001 */
@@ -53,7 +59,7 @@ header a:focus {
 }
 
 /* Especificidad del selector: 010 */
-.active {
+.active { /* Selector de clase utilizado exclusivamente para indicar el elemento activo en la navegación */
     font-weight: bold;
     font-size: 1.2em;
 }
@@ -63,12 +69,30 @@ header + p {
     font-size: 0.8em;
 }
 
+/* Especificidad del selector: 002 | 002 */
+header + p,
+h1 + p {
+    margin: 2%;
+}
+
 /* Especificidad del selector: 002 */
 header > button {
     background: none;
     color: #FFFFFF; /* Advertencia controlada: Color de fondo heredado de <header> */
     border: 0.1em solid;
     border-radius: 0.5em;
+}
+
+/* Especificidad del selector: 001 */
+main {
+    text-align: justify;
+    margin-left: 2%;
+    margin-right: 3%;
+}
+
+/* Especificidad del selector: 002 */
+nav a {
+    padding: 1%;
 }
 
 /* Especificidad del selector: 001 */
@@ -92,10 +116,61 @@ a:focus {
     color: #550000; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
 }
 
+/* Especificidad del selector: 001 */
+figure {
+    text-align: center;
+    padding: 1%;
+}
+
+/* Especificidad del selector: 001 */
+figcaption {
+    text-align: center;
+    padding-top: 2%;
+}
+
 /* Especificidad del selector: 001 | 001*/
 img,
 video {
     box-shadow: 0 0.5em 0.5em #777777;
+}
+
+/* Especificidad del selector: 001 | 001 */
+img,
+audio {
+    margin: 2% 0;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+/* Especificidad del selector: 001 */
+audio {
+    min-height: 3em;
+}
+
+/* Especificidad del selector: 001 */
+video {
+    margin: 2% auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+/* Especificidad del selector: 001 */
+ol {
+    line-height: 1.2em;
+}
+
+/* Especificidad del selector: 001 | 001 */
+ul,
+ol {
+    padding-left: 1.2em;
+}
+
+/* Especificidad del selector: 001 */
+li {
+    margin-left: 1em;
+    padding: 0.5em 0;
 }
 
 /* Especificidad del selector: 001 */
@@ -103,6 +178,7 @@ dl {
     background-color: #E6E275; /* Advertencia controlada: Color heredado de <body> */
     border-radius: 0.5em;
     border: #000000 0.2em solid;
+    padding: 1.2em;
 }
 
 /* Especificidad del selector: 001 */
@@ -111,9 +187,24 @@ dt {
 }
 
 /* Especificidad del selector: 001 */
+dd {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    padding: 0.2em;
+}
+
+/* Especificidad del selector: 001 */
 table {
     border-collapse: collapse;
     border: 0.1em solid #000000;
+    width: 100%;
+    text-align: center;
+    table-layout: fixed;
+}
+
+/* Especificidad del selector: 001 */
+h3 {
+    margin-top: 3em;
 }
 
 /* Especificidad del selector: 001 */
@@ -121,6 +212,7 @@ caption {
     font-weight: bold;
     background-color: #0910A0;
     color: #FFFFFF;
+    padding: 2%;
 }
 
 /* Especificidad del selector: 001 | 001 | 001 */
@@ -129,6 +221,7 @@ td,
 tr {
     border: 0.1em solid #000000;
     background-color: #E6E275; /* Advertencia controlada (x3): Color heredado de <body> */
+    padding: 2%;
 }
 
 /* Especificidad del selector: 011 */
@@ -141,17 +234,25 @@ footer {
     background-color: #0910A0;
     color: #FFFFFF;
     border-radius: 0.8em;
+    margin: 2%;
+    padding: 1%;
+    text-align: center;
 }
 
 /* Especificidad del selector: 003 */
 article h2 + img {
     border-radius: 1em;
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
 }
 
 /* Especificidad del selector: 003 */
 main h3 ~ article {
     border: 0.1em solid #000000;
     border-radius: 0.5em;
+    margin-block: 1em;
+    padding: 0.5em 2em 1.5em;
 }
 
 /* Especificidad del selector: 002 */
@@ -160,17 +261,112 @@ div img {
 }
 
 /* Especificidad del selector: 001 */
+svg {
+    margin: auto;
+    width: 80%;
+    height: 50vh;
+}
+
+/* Especificidad del selector: 016 */
+main article:nth-of-type(3) h3 + label + input + div {
+    margin: auto;
+    width: 75%;
+    height: 75vh;
+}
+
+/* Especificidad del selector: 001 */
 form {
     border: 0.2em solid #0910A0;
     border-radius: 0.2em;
+    width: 80%;
+    margin: auto;
+    padding: 2%;
+}
+
+/* Especificidad del selector: 002 */
+form label {
+    width: 100%;
+    margin: 0.5em 0;
 }
 
 /* Especificidad del selector: 002 */
 form input {
     border: 0.1em solid #000000;
+    margin: 1em 0;
+    padding: 1%;
+    width: 100%;
+}
+
+/* Especificidad del selector: 002 */
+form button {
+    margin: 1em;
+    padding: 1em;
 }
 
 /* Especificidad del selector: 012 */
 form button:hover {
     color: #0910A0; /* Advertencia controlada: Color de fondo (background) heredado de button definido en estilo.css */
+}
+
+/* Media queries aplicadas: redimensionado de fuentes y tamaño de elementos */
+
+/* Escritorio y portátiles L (> 769) */
+@media (min-width: 769px) {
+
+    /* Especificidad del selector: 001 */
+    video {
+        /* width: 100%; */
+        width: 60%;
+        height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
+
+    /* Especificidad del selector: 001 */
+    audio {
+        width: 100%;
+    }
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+
+    /* Especificidad del selector: 001 */
+    header {
+        padding: 1em 0;
+    }
+
+    /* Especificidad del selector: 002 */
+    header > button {
+        margin: 1em;
+        padding: 0.5em;
+    }
+
+    /* Especificidad del selector: 002 */
+    header nav {
+        width: 100%;
+        margin-top: 0.5em;
+        padding: 1em;
+    }
+
+    /* Especificidad del selector: 003 */
+    article h2 + img {
+        width: 100%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
+
+    /* Especificidad del selector: 002 */
+    article h2 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    /* Especificidad del selector: 005 */
+    article h3 + label + input + div {
+        width: 95%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        height: 60vh; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
+}
+
+/* Movil L (425px) */
+@media (max-width: 425px) {
+
 }

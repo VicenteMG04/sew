@@ -85,7 +85,7 @@
 
         // Función para borrar todos los registros de las tablas de la base de datos. Devuelve true si se vaciaron correctamente todas las tablas
         public function reiniciarBD() : bool{
-            $tables = ["observaciones","resultado","usuario"];
+            $tables = ["observaciones", "resultado", "usuario"];
 
             // Comprobación de conexión
             if (!($this->conn instanceof mysqli)) {

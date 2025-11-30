@@ -83,6 +83,7 @@ ALTER TABLE `observaciones`
 -- Indices de la tabla `resultado`
 --
 ALTER TABLE `resultado`
+  ADD PRIMARY KEY(`id_usuario`, `dispositivo`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
