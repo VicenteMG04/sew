@@ -1,7 +1,7 @@
 <?php
-    define("CRONOMETRO_SIN_HTML", true); // cronometro.php no genererará HTML
-    include_once("../cronometro.php");
-    
+    include_once("cronometro.php");
+    session_start();
+
     class Test {
         protected $server = "localhost";
         protected $user = "DBUSER2025";
