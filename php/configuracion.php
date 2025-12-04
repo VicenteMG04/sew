@@ -167,10 +167,6 @@
             $tablas = ["usuario", "resultado", "observaciones"];
 
             foreach ($tablas as $tabla) {
-                // Comentario para separar tablas
-                fputcsv($output, []);
-                fputcsv($output, ["# --- TABLA: $tabla ---"]);
-
                 // Consulta
                 $query = "SELECT * FROM `$tabla`";
                 $result = $this->conn->query($query);
@@ -179,23 +175,83 @@
                     continue;
                 }
 
-                // Encabezados de columna
-                $fields = $result->fetch_fields();
-                $headers = [];
-                foreach ($fields as $f) {
-                    $headers[] = $f->name;
-                }
-                fputcsv($output, $headers);
-
                 // Filas
                 while ($row = $result->fetch_assoc()) {
-                    fputcsv($output, $row);
+                    fputcsv($output, array_merge([$tabla], array_values($row)), ",", '"');
                 }
 
                 $result->free();
             }
-
             fclose($output);
+            return true;
+        }
+
+        // Función para importar desde un CSV los datos de las pruebas a la base de datos fila por fila
+        public function importarCSV($file): bool {
+            if (!$file || $file["error"] !== UPLOAD_ERR_OK) {
+                echo "<p>Error subiendo el archivo CSV.</p>";
+                return false;
+            }
+
+            $handle = fopen($file["tmp_name"], "r");
+            if (!$handle) {
+                echo "<p>No se pudo abrir el archivo CSV.</p>";
+                return false;
+            }
+
+            // Eliminar BOM si existe
+            $bom = pack('H*','EFBBBF');
+            $firstLine = fgets($handle);
+            if (substr($firstLine, 0, 3) === $bom) {
+                $firstLine = substr($firstLine, 3);
+            } 
+            rewind($handle); // Volver al inicio del archivo
+
+            // Vaciar tablas antes de importar
+            if (!$this->reiniciarBD()) {
+                fclose($handle);
+                return false;
+            }
+
+            while (($data = fgetcsv($handle, 0, ",", '"')) !== false) {
+                if (empty($data[0])) {
+                    continue; // Saltar líneas vacías
+                }
+                $stmt = null;
+                try {
+                    switch ($data[0]) {
+                        case "usuario":
+                            if (count($data) < 6) continue 2;
+                            $stmt = $this->conn->prepare("INSERT INTO usuario (id, profesion, edad, genero, pericia) VALUES (?, ?, ?, ?, ?)");
+                            $stmt->bind_param("isisi", $data[1], $data[2], $data[3], $data[4], $data[5]);
+                            break;
+
+                        case "resultado":
+                            if (count($data) < 9) continue 2;
+                            $stmt = $this->conn->prepare("INSERT INTO resultado (id_usuario, dispositivo, tiempo, completada, respuestas, comentarios, propuestas, valoracion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                            $stmt->bind_param("ississsi", $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8]);
+                            break;
+
+                        case "observaciones":
+                            if (count($data) < 3) continue 2;
+                            $stmt = $this->conn->prepare("INSERT INTO observaciones (id_usuario, comentarios) VALUES (?, ?)");
+                            $stmt->bind_param("is", $data[1], $data[2]);
+                            break;
+
+                        default:
+                            continue 2;
+                    }
+
+                    if ($stmt) {
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+                } catch (Exception $e) {
+                    echo "<p>Error al insertar datos: " . htmlspecialchars($e->getMessage()) . "</p>";
+                }
+            }
+
+            fclose($handle);
             return true;
         }
 
@@ -218,6 +274,10 @@
         } elseif (isset($_POST["exportar"])) { // Exportación de resultados a .csv
             $config->exportarCSV();
             exit;
+        } elseif (isset($_POST["importar"])) {
+            $msg = $config->importarCSV($_FILES["csvfile"] ?? null)
+                ? "Importación completada con éxito."
+                : "Error al importar los datos del archivo CSV. Asegúrate de adjuntar un archivo válido.";
         }
     }
 ?>
@@ -237,11 +297,20 @@
 
 <body>
     <h1>Configuración Test</h1>
-    <?php if (isset($msg)) echo "<p>$msg</p>"; ?>
-    <form method="post">
-        <button name="reiniciar" type="submit">Reiniciar base de datos (vaciar tablas)</button>
-        <button name="eliminar" type="submit">Eliminar base de datos</button>
-        <button name="exportar" type="submit">Exportar resultados (.csv)</button>
-    </form>
+    <main>
+        <?php if (isset($msg)) echo "<p>$msg</p>"; ?>
+        <form method="post" enctype="multipart/form-data">
+            <button name="reiniciar" type="submit">Reiniciar base de datos (vaciar tablas)</button>
+            <button name="eliminar" type="submit">Eliminar base de datos</button>
+            <button name="exportar" type="submit">Exportar resultados (.csv)</button>
+            
+            <label for="csvfile">Importar datos desde CSV:</label>
+            <input type="file" id="csvfile" name="csvfile" accept=".csv" />
+            <button name="importar" type="submit">Importar CSV</button>
+        </form>
+    </main>
+    <footer>
+        <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>
+    </footer>
 </body>
 </html>

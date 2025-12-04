@@ -191,14 +191,24 @@
                     $stmt->close();
                 }
 
-                // 2) Tabla resultado: insertar (id_usuario, dispositivo, tiempo, completada, comentarios, propuestas, valoracion)
+                // 2) Tabla resultado: insertar (id_usuario, dispositivo, tiempo, completada, respuestas, comentarios, propuestas, valoracion)
                 $completada = 1;
-                $stmt = $this->conn->prepare("INSERT INTO resultado (id_usuario, dispositivo, tiempo, completada, comentarios, propuestas, valoracion) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $respuestasArray = $_SESSION["respuestasUsuario"] ?? [];
+                $respuestasString = "";
+                foreach ($respuestasArray as $r) {
+                    $r = trim($r);
+                    $r = str_replace(",", ";", $r);
+                    if ($respuestasString !== "") {
+                        $respuestasString .= ",";
+                    }
+                    $respuestasString .= $r;
+                }
+                $stmt = $this->conn->prepare("INSERT INTO resultado (id_usuario, dispositivo, tiempo, completada, respuestas, comentarios, propuestas, valoracion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 if (!$stmt) {
                     throw new Exception($this->conn->error);
                 }
-                // Tipos: i s s i s s i => "ississi"
-                $stmt->bind_param("ississi", $codigo, $dispositivo, $tiempoSQL, $completada, $comentarios_usuario, $propuestas, $valoracion);
+                // Tipos: i s s i s s s i => "ississsi"
+                $stmt->bind_param("ississsi", $codigo, $dispositivo, $tiempoSQL, $completada, $respuestasString, $comentarios_usuario, $propuestas, $valoracion);
                 $stmt->execute();
                 $stmt->close();
 
@@ -334,7 +344,7 @@
 
             // ESTADO 4: FIN
             if ($estado === "fin") {
-                echo "<p>La prueba ha sido registrada correctamente.</p>";
+                echo "<p>La prueba ha sido registrada correctamente. Puede cerrar esta pestaña.</p>";
 
                 session_unset();
                 session_regenerate_id(true);
@@ -386,28 +396,33 @@
 
 <body>
     <h1>Test</h1>
-    <?php $test->mostrarFormulario(); ?>
-    <dialog>
-        <p></p>
-        <button>Continuar</button>
-    </dialog>
+    <main>
+        <?php $test->mostrarFormulario(); ?>
+        <dialog>
+            <p></p>
+            <button>Continuar</button>
+        </dialog>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const dialog = document.querySelector("dialog");
-            const mensaje = dialog.querySelector("dialog p");
-            const btn = dialog.querySelector("dialog button");
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const dialog = document.querySelector("dialog");
+                const mensaje = dialog.querySelector("dialog p");
+                const btn = dialog.querySelector("dialog button");
 
-            // La nota llega desde PHP por sesión al cargar estado "formularioFinal"
-            <?php if (isset($_SESSION["estadoTest"]) && $_SESSION["estadoTest"] === "formularioFinal") : ?>
-                mensaje.textContent = "Has acertado <?php echo $_SESSION['nota']; ?> de 10 preguntas.";
-                dialog.showModal();
+                // La nota llega desde PHP por sesión al cargar estado "formularioFinal"
+                <?php if (isset($_SESSION["estadoTest"]) && $_SESSION["estadoTest"] === "formularioFinal") : ?>
+                    mensaje.textContent = "Has acertado <?php echo $_SESSION['nota']; ?> de 10 preguntas.";
+                    dialog.showModal();
 
-                btn.addEventListener("click", () => {
-                    dialog.close();
-                });
-            <?php endif; ?>
-        });
-    </script>
+                    btn.addEventListener("click", () => {
+                        dialog.close();
+                    });
+                <?php endif; ?>
+            });
+        </script>
+    </main>
+    <footer>
+        <p>© MotoGP - Desktop | Software y Estándares para la Web (SEW), Curso 2025-2026 | Vicente Megido García (UO294013) - Todos los derechos reservados</p>
+    </footer>
 </body>
 </html>

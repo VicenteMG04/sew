@@ -76,7 +76,7 @@ form button {
         display: none;
     }
 
-    /* Especificidad del selector: 012 */
+    /* Especificidad del selector: 002 */
     header nav {
         display: flex;
     }

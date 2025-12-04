@@ -47,9 +47,10 @@ header a:visited {
     color: #EEEEEE; /* Advertencia controlada: Color de fondo heredado de <header> */
 }
 
-/* Especificidad del selector: 012 */
-header a:hover {
-    color: #FFFFBB; /* Advertencia controlada: Color de fondo heredado de <header> */
+/* Especificidad del selector: 012 | 012*/
+header a:hover,
+header button:hover {
+    color: #FFFFBB; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
 }
 
 /* Especificidad del selector: 012 | 012 */
@@ -154,7 +155,6 @@ video {
     height: auto;
     object-fit: cover;
 }
-
 
 /* Especificidad del selector: 001 */
 ol {
@@ -303,8 +303,8 @@ form button {
     padding: 1em;
 }
 
-/* Especificidad del selector: 011 */
-button:hover {
+/* Especificidad del selector: 012 */
+main button:hover {
     color: #0910A0; /* Advertencia controlada: Color de fondo (background) heredado de button definido en estilo.css */
 }
 
@@ -323,6 +323,7 @@ textarea {
     resize: none;
 }
 
+/* Especificidad del selector: 002 */
 dialog button {
     width: 100%;
     margin: auto;
