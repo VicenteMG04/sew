@@ -103,18 +103,18 @@ a {
 
 /* Especificidad del selector: 011 */
 a:visited {
-    color: #0000AA; /* Advertencia controlada: Color de fondo heredado de <header> */
+    color: #0000AA; /* Advertencia controlada: Color de fondo heredado de <body> */
 }
 
 /* Especificidad del selector: 011 */
 a:hover {
-    color: #004400; /* Advertencia controlada: Color de fondo heredado de <header> */
+    color: #004400; /* Advertencia controlada: Color de fondo heredado de <body> */
 }
 
 /* Especificidad del selector: 011 | 011 */
 a:active,
 a:focus {
-    color: #550000; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
+    color: #550000; /* Advertencia controlada (x2): Color de fondo heredado de <body> */
 }
 
 /* Especificidad del selector: 001 */
@@ -175,7 +175,7 @@ li {
 
 /* Especificidad del selector: 001 */
 dl {
-    background-color: #E6E275; /* Advertencia controlada: Color heredado de <body> */
+    background-color: #E6E275; /* Advertencia controlada: Color de primer plano (letra) heredado de <body> */
     border-radius: 0.5em;
     border: #000000 0.2em solid;
     padding: 1.2em;
@@ -220,13 +220,13 @@ th,
 td,
 tr {
     border: 0.1em solid #000000;
-    background-color: #E6E275; /* Advertencia controlada (x3): Color heredado de <body> */
+    background-color: #E6E275; /* Advertencia controlada (x3): Color de primer plano (letra) heredado de <body> */
     padding: 2%;
 }
 
 /* Especificidad del selector: 011 */
 td:hover {
-    background-color: #FFFFFF; /* Advertencia controlada: Color heredado de <body> */
+    background-color: #FFFFFF; /* Advertencia controlada: Color de primer plano (letra) heredado de <body> */
 }
 
 /* Especificidad del selector: 001 */
@@ -243,7 +243,7 @@ footer {
 article h2 + img {
     border-radius: 1em;
     width: 60%;
-    height: auto;
+    height: 70vh;
     margin: 0 auto;
 }
 
@@ -305,7 +305,7 @@ form button {
 
 /* Especificidad del selector: 012 */
 main button:hover {
-    color: #0910A0; /* Advertencia controlada: Color de fondo (background) heredado de button definido en estilo.css */
+    color: #0910A0; /* Advertencia controlada: Color de fondo heredado de <button> (color por defecto) */
 }
 
 /* Especificidad del selector: 001 */
@@ -337,7 +337,6 @@ dialog button {
 
     /* Especificidad del selector: 001 */
     video {
-        /* width: 100%; */
         width: 60%;
         height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
@@ -350,6 +349,11 @@ dialog button {
 
 /* Tablet (768px) */
 @media (max-width: 768px) {
+
+    /* Especificidad del selector: 001 */
+    body {
+        font-size: 0.8em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
 
     /* Especificidad del selector: 001 */
     header {
@@ -372,23 +376,30 @@ dialog button {
     /* Especificidad del selector: 003 */
     article h2 + img {
         width: 100%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
-        height: auto; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 002 */
     article h2 {
-        font-size: 1.2em;
         text-align: center;
     }
 
     /* Especificidad del selector: 005 */
     article h3 + label + input + div {
-        width: 95%; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
-        height: 60vh; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        width: 95%;
+        height: 60vh;
     }
 }
 
 /* Movil L (425px) */
 @media (max-width: 425px) {
 
+    /* Especificidad del selector: 001 */
+    body {
+        font-size: 0.6em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
+
+    /* Especificidad del selector: 003 */
+    article h2 + img {
+        height: 50vh; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+    }
 }

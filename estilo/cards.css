@@ -37,7 +37,7 @@ article img {
     position: absolute;
     object-fit: contain;
     border-radius: 0.3em;
-    background: #E6E275; /* Advertencia controlada (x2): Color heredado de <body> */
+    background: #E6E275; /* Advertencia controlada (x2): Color de primer plano (letra) heredado de <body> */
     backface-visibility: hidden;
 }
 

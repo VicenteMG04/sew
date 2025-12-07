@@ -34,8 +34,3 @@ main p {
         grid-column-end: 3; /* Advertencia controlada (x2): Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 }
-
-/* Movil L (425px) */
-@media (max-width: 425px) {
-
-}

@@ -108,8 +108,3 @@ form button {
         display: none; /* En dispositivos móviles, NO mostrar las migas de navegación */
     }
 }
-
-/* Movil L (425px) */
-@media (max-width: 425px) {
-
-}
