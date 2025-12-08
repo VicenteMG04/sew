@@ -62,7 +62,9 @@ header a:focus {
 /* Especificidad del selector: 010 */
 .active { /* Selector de clase utilizado exclusivamente para indicar el elemento activo en la navegación */
     font-weight: bold;
-    font-size: 1.2em;
+    border: #FFFFFF 0.1em solid;
+    border-radius: 1em;
+    padding: 2%;
 }
 
 /* Especificidad del selector: 002 */
