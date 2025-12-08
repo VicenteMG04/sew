@@ -1,3 +1,18 @@
+// Tras las pruebas de usabilidad, se ha detectado que al volver a una página
+// desde la caché del navegador (usando el botón flecha "Atrás" del navegador),
+// los scripts no funcionan correctamente (se guarda el estado anterior en los
+// inputs pero no se mantiene la información).
+// Para evitar este problema, se fuerza la recarga de la página:
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+    const nav = performance.getEntriesByType("navigation")[0];
+    if (nav && nav.type === "back_forward") {
+        window.location.reload();
+    }
+});
+
 class Circuito {
 
     constructor() {
