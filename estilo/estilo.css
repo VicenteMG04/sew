@@ -352,7 +352,7 @@ dialog button {
 
     /* Especificidad del selector: 001 */
     body {
-        font-size: 0.8em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        font-size: 0.9em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 001 */
@@ -395,7 +395,7 @@ dialog button {
 
     /* Especificidad del selector: 001 */
     body {
-        font-size: 0.6em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
+        font-size: 0.8em; /* Advertencia controlada: Redefinición de propiedad para preservar la adaptabilidad de la web */
     }
 
     /* Especificidad del selector: 003 */
