@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 class Svg(object):
     """Genera archivos SVG con rectángulos, círculos, líneas, polilíneas y texto"""
     def __init__(self):
-        self.raiz = ET.Element('svg', xmlns="http://www.w3.org/2000/svg")
+        self.raiz = ET.Element('svg', xmlns="http://www.w3.org/2000/svg", version="2.0")
 
     def addRect(self, x, y, width, height, fill, stroke):
         ET.SubElement(self.raiz, 'rect', x=x, y=y, width=width, height=height, fill=fill, stroke=stroke)

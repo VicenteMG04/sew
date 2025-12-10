@@ -82,6 +82,8 @@ class CargadorSVG {
         const parser = new DOMParser();
         const documentoSVG = parser.parseFromString(svgTexto, 'image/svg+xml');
         const elementoSVG = documentoSVG.documentElement;
+        // Cambio de versión para evitar errores del validador
+        elementoSVG.setAttribute("version", "1.1"); 
         // Atributos necesarios para que el SVG sea "responsive"
         elementoSVG.setAttribute("viewBox", "0 0 800 400");
         elementoSVG.setAttribute("preserveAspectRatio", "xMidYMid meet");
