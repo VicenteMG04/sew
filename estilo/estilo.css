@@ -67,11 +67,6 @@ header a:focus {
     padding: 2%;
 }
 
-header ::selection {
-    background-color: #0910A0;
-    color: #FFFFFF;
-}
-
 /* Especificidad del selector: 002 */
 header + p {
     font-size: 0.8em;
