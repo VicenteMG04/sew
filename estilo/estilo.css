@@ -59,16 +59,10 @@ header a:focus {
     color: #FFDDFF; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
 }
 
-header a,
-header a:visited,
-header a:hover,
-header a:focus,
-header a:active {
-    background-color: #0910A0;
-}
-
 /* Especificidad del selector: 010 */
 .active { /* Selector de clase utilizado exclusivamente para indicar el elemento activo en la navegación */
+    color: #FFFFFF;
+    background-color: #0910A0;
     font-weight: bold;
     border: #FFFFFF 0.1em solid;
     border-radius: 1em;
