@@ -33,14 +33,13 @@ h1 {
 
 /* Especificidad del selector: 001 */
 header {
-    background-color: #0910A0;
+    background-color: #000000;
     color: #FFFFFF;
 }
 
 /* Especificidad del selector: 002 */
 header a {
     color: #FFFFFF; /* Advertencia controlada: Color de fondo heredado de <header> */
-    background-color: #0910A0;
 }
 
 /* Especificidad del selector: 012 */
