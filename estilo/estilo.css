@@ -33,7 +33,7 @@ h1 {
 
 /* Especificidad del selector: 001 */
 header {
-    background-color: #000000;
+    background-color: #0910A0;
     color: #FFFFFF;
 }
 
@@ -57,6 +57,14 @@ header button:hover {
 header a:active,
 header a:focus {
     color: #FFDDFF; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
+}
+
+header a,
+header a:visited,
+header a:hover,
+header a:focus,
+header a:active {
+    background-color: #0910A0;
 }
 
 /* Especificidad del selector: 010 */
