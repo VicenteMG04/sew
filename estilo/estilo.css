@@ -61,12 +61,15 @@ header a:focus {
 
 /* Especificidad del selector: 010 */
 .active { /* Selector de clase utilizado exclusivamente para indicar el elemento activo en la navegación */
-    color: #FFFFFF;
-    background-color: #0910A0;
     font-weight: bold;
     border: #FFFFFF 0.1em solid;
     border-radius: 1em;
     padding: 2%;
+}
+
+header ::selection {
+    background-color: #0910A0;
+    color: #FFFFFF;
 }
 
 /* Especificidad del selector: 002 */
