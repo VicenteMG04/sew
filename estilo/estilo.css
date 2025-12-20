@@ -40,6 +40,7 @@ header {
 /* Especificidad del selector: 002 */
 header a {
     color: #FFFFFF; /* Advertencia controlada: Color de fondo heredado de <header> */
+    background-color: #0910A0;
 }
 
 /* Especificidad del selector: 012 */
