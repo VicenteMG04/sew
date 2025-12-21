@@ -49,13 +49,13 @@ header a:visited {
 
 /* Especificidad del selector: 012*/
 header button:hover {
-    color: #FFFFBB; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
+    color: #FFFFBB; /* Advertencia controlada: Color de fondo heredado de <header> */
 }
 
 /* Especificidad del selector: 012*/
 header a:hover {
-    color: #0910A0; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
-    background-color: #FFFFFF;
+    color: #0910A0;
+    background-color: #FFFFFF; /* Color de fondo específico para evitar errores en aChecker */
     border-radius: 1em;
     padding: 1%;
 }
@@ -63,8 +63,8 @@ header a:hover {
 /* Especificidad del selector: 012 | 012 */
 header a:active,
 header a:focus {
-    color: #D45DD4; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
-    background-color: #FFFFFF;
+    color: #D45DD4;
+    background-color: #FFFFFF; /* Color de fondo específico para evitar errores en aChecker */
 }
 
 /* Especificidad del selector: 010 */
