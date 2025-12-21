@@ -51,6 +51,7 @@ header a:visited {
 header a:hover,
 header button:hover {
     color: #FFFFBB; /* Advertencia controlada (x2): Color de fondo heredado de <header> */
+    background-color: #0910A0;
 }
 
 /* Especificidad del selector: 012 | 012 */
