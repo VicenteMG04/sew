@@ -7,7 +7,7 @@ class Noticias {
     constructor() {
         this.#busqueda = "MotoGP";
         this.#url = "https://api.thenewsapi.com/v1/news/all";
-        this.#apiKey = "udb6f7ArWQFjLudHAh4MXdtIX7EJPCB2KDOmxcoS";
+        this.#apiKey = "YOUR_API_KEY";
     }
 
     async buscar() {
